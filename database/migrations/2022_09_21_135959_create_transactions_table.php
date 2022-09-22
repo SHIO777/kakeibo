@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        // Schema::create('transactions', function (Blueprint $table) {
             // $table->id();
             // // // $table->foreignId('kind_id')->after('id')->nullable()->constrained('kind')->cascadeOnDelete();
             // // $table->foreignId('kind_id')->after('id')->constrained('kinds')->cascadeOnDelete();
@@ -23,7 +23,7 @@ return new class extends Migration
             // // $table->string('place')->nullable();
             // // $table->string('note')->nullable();
             // $table->timestamps();
-        });
+        // });
     }
 
     /**
