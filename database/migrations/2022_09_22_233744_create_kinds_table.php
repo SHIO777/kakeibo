@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('kinds', function (Blueprint $table) {
             $table->id();
-            $table->string('kind');
             $table->timestamps();
         });
     }

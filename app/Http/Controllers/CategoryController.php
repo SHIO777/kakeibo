@@ -20,9 +20,10 @@ class CategoryController extends Controller
         // $categories = Category::getAllOrderByUpdated_at();
         // categoryをアルファベット順に並び替えたのち，kind_id順に並びかえpaymentとincomeに分ける
         $categories = Category::all()->sortBy('category')->sortBy('kind_id');
-        // return view('category.index', compact('categories'));
+        // ddd($categories);
+        // compactがないとerror: compactは，controllerからviewに渡すための関数
+        return view('category.index', compact('categories'));
         // ddd(compact('categories'));
-        return view('category.index', $categories);
     }
 
     /**
