@@ -20,7 +20,7 @@
               <tr class="hover:bg-grey-lighter">
                 <td class="py-4 px-6 border-b border-grey-light">
                   @if ($category->kind_id === 1)
-                    <h3 class="text-left font-bold text-lg text-rose-500">{{$category->category}}</h3>                      
+                    <h3 class="text-left font-bold text-lg text-orange-500">{{$category->category}}</h3>                      
                   @else
                     <h3 class="text-left font-bold text-lg text-green-500">{{$category->category}}</h3>
                   @endif
