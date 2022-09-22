@@ -16,7 +16,8 @@ class KindController extends Controller
      */
     public function index()
     {
-        return view('kind.index');
+        $kinds = Kind::getAllOrderByUpdated_at();
+        return view('kind.index', compact('kinds'));
     }
 
     /**
@@ -37,7 +38,22 @@ class KindController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // バリデーション
+        $validator = Validator::make($request->all(), [
+            'kind' => 'required | max:100',
+        ]);
+        // バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect()
+            ->route('kind.create')
+            ->withInput()
+            ->withErrors($validator);
+        }
+        // create()は最初から用意されている関数
+        // 戻り値は挿入されたレコードの情報
+        $result = Kind::create($request->all());
+        // ルーティング「todo.index」にリクエスト送信（一覧ページに移動）
+        return redirect()->route('kind.index');
     }
 
     /**

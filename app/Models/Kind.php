@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Kind extends Model
 {
     use HasFactory;
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
+    public static function getAllOrderByUpdated_at()
+    {
+        // selfはKindモデルのこと
+        return self::orderBy('updated_at', 'desc')->get();
+    }
 }
