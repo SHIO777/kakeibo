@@ -16,22 +16,28 @@
             {{ __('Dashboard') }}
           </x-nav-link>
         </div>
-        <!-- 一覧ページへのリンクを追加 -->
+        <!-- category 一覧ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
             {{ __('Category Index') }}
           </x-nav-link>
         </div>
-        <!-- 作成ページへのリンクを追加 -->
+        <!-- category 作成ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('kind.create')" :active="request()->routeIs('kind.create')">
-            {{ __('Kind Create') }}
+          <x-nav-link :href="route('category.create')" :active="request()->routeIs('category.create')">
+            {{ __('Category Create') }}
+          </x-nav-link>
+        </div>
+        <!-- Kind 一覧ページへのリンクを追加 -->
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <x-nav-link :href="route('kind.index')" :active="request()->routeIs('kind.index')">
+            {{ __('Kind Index') }}
           </x-nav-link>
         </div>
         <!-- Kind 作成ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('kind.index')" :active="request()->routeIs('kind.index')">
-            {{ __('Kind Index') }}
+          <x-nav-link :href="route('kind.create')" :active="request()->routeIs('kind.create')">
+            {{ __('Kind Create') }}
           </x-nav-link>
         </div>
       </div>
