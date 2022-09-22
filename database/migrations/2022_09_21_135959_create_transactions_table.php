@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            // $table->string()
+            // $table->
+            // $table->foreignId('kind_id')->after('id')->nullable()->constrained('kind')->cascadeOnDelete();
+            $table->foreignId('kind_id')->after('id')->constrained('kinds')->cascadeOnDelete();
+            $table->foreignId('category_id')->after('kind_id')->constrained('categories')->cascadeOnDelete();
+            $table->integer('price');
+            $table->date('date');
+            $table->string('place')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
@@ -28,5 +35,12 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('transactions');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropForeign(['kind_id']);
+            $table->dropColumn(['kind_id']);
+
+            $table->dropForeign(['category_id']);
+            $table->dropColumn(['category_id']);
+        })
     }
 };
