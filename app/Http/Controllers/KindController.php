@@ -16,7 +16,8 @@ class KindController extends Controller
      */
     public function index()
     {
-        $kinds = Kind::getAllOrderByUpdated_at();
+        // $kinds = Kind::getAllOrderByUpdated_at();
+        $kinds = Kind::all()->sortBy('id');
         return view('kind.index', compact('kinds'));
     }
 
@@ -27,6 +28,7 @@ class KindController extends Controller
      */
     public function create()
     {
+
         return view('kind.create');
     }
 

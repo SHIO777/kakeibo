@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Category;
+use App\Models\Kind;
 use Auth;
 
 class CategoryController extends Controller
@@ -16,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::getAllOrderByUpdated_at();
+        // $categories = Category::getAllOrderByUpdated_at();
+        // categoryをアルファベット順に並び替えたのち，kind_id順に並びかえpaymentとincomeに分ける
+        $categories = Category::all()->sortBy('category')->sortBy('kind_id');
         return view('category.index', compact('categories'));
     }
 
@@ -27,7 +30,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        // PaymentかIncomeを選択するために，kinds tableから情報を取得
+        $kinds = Kind::getAllOrderByUpdated_at();
+        // ddd($kinds);
+        return view('category.create', compact('kinds'));
     }
 
     /**
@@ -39,7 +45,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // バリデーション
+        // dd($request);
         $validator = Validator::make($request->all(), [
+            'kind_id' => 'required | max:100',
             'category' => 'required | max:100',
             'description' => 'required',
         ]);

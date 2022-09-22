@@ -12,6 +12,18 @@
           @include('common.errors')
           <form class="mb-6" action="{{ route('category.store') }}" method="POST">
             @csrf
+
+            {{-- PaymentかIncomeを選択 --}}
+            <div class="flex flex-col mb-4">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Kind</label>
+              <select name="kind_id" id="kind_id">
+                @foreach ($kinds as $kind)
+                    <option value="{{ $kind->id }}">{{ $kind->id }}: {{ $kind->kind }}</option>
+                @endforeach
+              </select>
+              {{-- <input class="border py-2 px-3 text-grey-darkest" type="text" name="kind" id="kind" value="{{ old('kind') }}"> --}}
+            </div>
+
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="category">Category</label>
               <input class="border py-2 px-3 text-grey-darkest" type="text" name="category" id="category" value="{{ old('category') }}">
