@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kinds', function (Blueprint $table) {
-            $table->id();
-            $table->string('kind');
-            $table->timestamps();
-        });
+        // Schema::create('kinds', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('kind');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kinds');
+        // Schema::dropIfExists('kinds');
     }
 };

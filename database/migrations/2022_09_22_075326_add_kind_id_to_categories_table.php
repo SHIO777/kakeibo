@@ -20,9 +20,11 @@ return new class extends Migration
 
         // sail php artisan migrate
         // でマイグレートしたのち，phpmyadminより，category tableのkind_idを適当な数で埋めておくこと
-        Schema::table('categories', function (Blueprint $table) {
-            $table->foreignId('kind_id')->after('id')->nullable()->constrained()->cascadeOnDelete();
-        });
+
+
+        // Schema::table('categories', function (Blueprint $table) {
+        //     $table->foreignId('kind_id')->after('id')->nullable()->constrained()->cascadeOnDelete();
+        // });
     }
 
     /**
@@ -32,9 +34,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropForeign(['kind_id']);
-            $table->dropColumn(['kind_id']);
-        });
+        // Schema::table('categories', function (Blueprint $table) {
+        //     $table->dropForeign(['kind_id']);
+        //     $table->dropColumn(['kind_id']);
+        // });
     }
 };
