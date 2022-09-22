@@ -18,6 +18,7 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Kind</label>
               <select name="kind_id" id="kind_id">
                 @foreach ($kinds as $kind)
+                    {{-- <option value="{{ $kind->id }}">{{ $kind->id }}: {{ $kind->kind }}</option> --}}
                     <option value="{{ $kind->id }}">{{ $kind->id }}: {{ $kind->kind }}</option>
                 @endforeach
               </select>
