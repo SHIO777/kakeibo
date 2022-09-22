@@ -30,4 +30,7 @@
             </main>
         </div>
     </body>
+    {{-- <script type="text/javascript">
+        {{ $javascript }}
+    </script> --}}
 </html>

@@ -14,4 +14,8 @@
             </div>
         </div>
     </div>
+
+    <x-slot:javascript>
+        
+    </x-slot>
 </x-app-layout>

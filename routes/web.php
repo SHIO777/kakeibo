@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\KindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,10 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::group(['middleware' => 'auth'], function(){
+    // 所得と支出のカテゴリー
     Route::resource('category', CategoryController::class);
+    // 所得か支出の区別
+    Route::resource('kind', KindController::class);
 });
 
 Route::get('/', function () {

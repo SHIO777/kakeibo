@@ -52,7 +52,7 @@ class CategoryController extends Controller
         }
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
-        $result = Tweet::create($request->all());
+        $result = Category::create($request->all());
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
         return redirect()->route('category.index');
     }
@@ -76,7 +76,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -88,7 +89,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+            'category' => 'required | max:100',
+            'description' => 'required',
+        ]);
+        //バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect()
+            ->route('category.edit', $id)
+            ->withInput()
+            ->withErrors($validator);
+        }
+        //データ更新処理
+        $result = Category::find($id)->update($request->all());
+        return redirect()->route('category.index');
     }
 
     /**
@@ -99,6 +114,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = Category::find($id)->delete();
+        return redirect()->route('category.index');
     }
 }
