@@ -10,8 +10,8 @@ class Transaction extends Model
     protected $guarded = [
         'id',
         'created_at',
-        'kind_id',
-        'category_id',
+        // 'kind_id',
+        // 'category_id',
         'updated_at',
     ];
 

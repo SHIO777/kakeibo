@@ -46,20 +46,23 @@ class TransactionController extends Controller
     {
         // validation
         $validator = Validator::make($request->all(), [
-            'kind_id' => 'required | max:100',
-            'category' => 'required | max:100',
-            'description' => 'required',
+            'kind_id' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'date' => 'required',
+            'place' => 'max:100',
+            'note' => 'max:100',
         ]);
         // バリデーション:エラー
         if ($validator->fails()) {
             return redirect()
-            ->route('category.create')
+            ->route('transaction.create')
             ->withInput()
             ->withErrors($validator);
         }
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
-        $result = Category::create($request->all());
+        $result = Transaction::create($request->all());
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
         return redirect()->route('category.index');
     }
@@ -83,7 +86,8 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transaction = Transaction::find($id);
+        return view('transaction.edit', compact('transaction'));
     }
 
     /**
@@ -95,7 +99,26 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kind_id' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'date' => 'required',
+            'place' => 'max:100',
+            'note' => 'max:100',
+        ]);
+        // バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect()
+            ->route('transaction.edit', $id)
+            ->withInput()
+            ->withErrors($validator);
+        }
+        // create()は最初から用意されている関数
+        // 戻り値は挿入されたレコードの情報
+        $result = Transaction::find($id)->update($request->all());
+        // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
+        return redirect()->route('transaction.index');
     }
 
     /**
@@ -106,6 +129,7 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = Transaction::find($id)->delete();
+        return redirect()->route('transaction.index');
     }
 }

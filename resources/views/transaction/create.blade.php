@@ -26,7 +26,7 @@
             {{-- Categoryを選択 --}}
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Category</label>
-              <select name="kind_id" id="kind_id">
+              <select name="category_id" id="category_id">
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
                 @endforeach
