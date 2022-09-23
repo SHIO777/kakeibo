@@ -1328,3 +1328,718 @@ added 1 package, and audited 95 packages in 6s
 
 found 0 vulnerabilities
 (base) ta2ya@a-2 kakeibo % 
+
+
+
+
+conda activate base
+(base) ta2ya@a-2 kakeibo % conda activate base
+(base) ta2ya@a-2 kakeibo % 
+ *  History restored 
+
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run dev  
+
+> dev
+> vite
+
+error when starting dev server:
+Error: Port 5173 is already in use
+    at Server.onError (file:///var/www/html/node_modules/vite/dist/node/chunks/dep-557f29e6.js:52534:28)
+    at Server.emit (node:events:513:28)
+    at emitErrorNT (node:net:1459:8)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 794 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 810 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 814 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run dev  
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 839 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run dev  
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 803 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 825 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % node -v
+zsh: command not found: node
+(base) ta2ya@a-2 kakeibo % sail node -v
+v16.17.0
+(base) ta2ya@a-2 kakeibo % sail npm -v
+8.19.2
+(base) ta2ya@a-2 kakeibo % npm install laravel-mix --save-dev
+env: node: No such file or directory
+(base) ta2ya@a-2 kakeibo % sail npm install laravel-mix --save-dev
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+
+added 685 packages, and audited 780 packages in 1m
+
+79 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 2141 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 834 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                                                                                   
+(base) ta2ya@a-2 kakeibo % git rm --cached .
+fatal: not removing '.' recursively without -r
+(base) ta2ya@a-2 kakeibo % git rm -r --cached . 
+rm '.DS_Store'
+rm '.editorconfig'
+rm '.env.example'
+rm '.gitattributes'
+rm '.gitignore'
+rm 'README.md'
+rm 'README.pdf'
+rm 'app/.DS_Store'
+rm 'app/Console/Kernel.php'
+rm 'app/Exceptions/Handler.php'
+rm 'app/Http/Controllers/Auth/AuthenticatedSessionController.php'
+rm 'app/Http/Controllers/Auth/ConfirmablePasswordController.php'
+rm 'app/Http/Controllers/Auth/EmailVerificationNotificationController.php'
+rm 'app/Http/Controllers/Auth/EmailVerificationPromptController.php'
+rm 'app/Http/Controllers/Auth/NewPasswordController.php'
+rm 'app/Http/Controllers/Auth/PasswordResetLinkController.php'
+rm 'app/Http/Controllers/Auth/RegisteredUserController.php'
+rm 'app/Http/Controllers/Auth/VerifyEmailController.php'
+rm 'app/Http/Controllers/CategoryController.php'
+rm 'app/Http/Controllers/Controller.php'
+rm 'app/Http/Controllers/KindController.php'
+rm 'app/Http/Controllers/TransactionController.php'
+rm 'app/Http/Kernel.php'
+rm 'app/Http/Middleware/Authenticate.php'
+rm 'app/Http/Middleware/EncryptCookies.php'
+rm 'app/Http/Middleware/PreventRequestsDuringMaintenance.php'
+rm 'app/Http/Middleware/RedirectIfAuthenticated.php'
+rm 'app/Http/Middleware/TrimStrings.php'
+rm 'app/Http/Middleware/TrustHosts.php'
+rm 'app/Http/Middleware/TrustProxies.php'
+rm 'app/Http/Middleware/ValidateSignature.php'
+rm 'app/Http/Middleware/VerifyCsrfToken.php'
+rm 'app/Http/Requests/Auth/LoginRequest.php'
+rm 'app/Models/.DS_Store'
+rm 'app/Models/Category.php'
+rm 'app/Models/Kind.php'
+rm 'app/Models/Transaction.php'
+rm 'app/Models/User.php'
+rm 'app/Providers/AppServiceProvider.php'
+rm 'app/Providers/AuthServiceProvider.php'
+rm 'app/Providers/BroadcastServiceProvider.php'
+rm 'app/Providers/EventServiceProvider.php'
+rm 'app/Providers/RouteServiceProvider.php'
+rm 'app/View/Components/AppLayout.php'
+rm 'app/View/Components/GuestLayout.php'
+rm 'artisan'
+rm 'bootstrap/app.php'
+rm 'bootstrap/cache/.gitignore'
+rm 'command.ipynb'
+rm 'command_log.txt'
+rm 'composer.json'
+rm 'composer.lock'
+rm 'config/app.php'
+rm 'config/auth.php'
+rm 'config/broadcasting.php'
+rm 'config/cache.php'
+rm 'config/cors.php'
+rm 'config/database.php'
+rm 'config/filesystems.php'
+rm 'config/hashing.php'
+rm 'config/logging.php'
+rm 'config/mail.php'
+rm 'config/queue.php'
+rm 'config/sanctum.php'
+rm 'config/services.php'
+rm 'config/session.php'
+rm 'config/view.php'
+rm 'database/.DS_Store'
+rm 'database/.gitignore'
+rm 'database/factories/UserFactory.php'
+rm 'database/migrations/.DS_Store'
+rm 'database/migrations/2014_10_12_000000_create_users_table.php'
+rm 'database/migrations/2014_10_12_100000_create_password_resets_table.php'
+rm 'database/migrations/2019_08_19_000000_create_failed_jobs_table.php'
+rm 'database/migrations/2019_12_14_000001_create_personal_access_tokens_table.php'
+rm 'database/migrations/2022_09_22_070659_create_kinds_table.php'
+rm 'database/migrations/2022_09_23_001015_create_categories_table.php'
+rm 'database/migrations/2022_09_23_001302_create_transactions_table.php'
+rm 'database/seeders/DatabaseSeeder.php'
+rm 'docker-compose.yml'
+rm 'lang/en/auth.php'
+rm 'lang/en/pagination.php'
+rm 'lang/en/passwords.php'
+rm 'lang/en/validation.php'
+rm 'package-lock.json'
+rm 'package.json'
+rm 'phpunit.xml'
+rm 'postcss.config.js'
+rm 'public/.htaccess'
+rm 'public/favicon.ico'
+rm 'public/index.php'
+rm 'public/robots.txt'
+rm 'resources/css/app.css'
+rm 'resources/js/app.js'
+rm 'resources/js/bootstrap.js'
+rm 'resources/js/chartjs.js'
+rm 'resources/views/auth/confirm-password.blade.php'
+rm 'resources/views/auth/forgot-password.blade.php'
+rm 'resources/views/auth/login.blade.php'
+rm 'resources/views/auth/register.blade.php'
+rm 'resources/views/auth/reset-password.blade.php'
+rm 'resources/views/auth/verify-email.blade.php'
+rm 'resources/views/category/create.blade.php'
+rm 'resources/views/category/edit.blade.php'
+rm 'resources/views/category/index.blade.php'
+rm 'resources/views/category/show.blade.php'
+rm 'resources/views/chartjs.blade.php'
+rm 'resources/views/common/errors.blade.php'
+rm 'resources/views/components/application-logo.blade.php'
+rm 'resources/views/components/auth-card.blade.php'
+rm 'resources/views/components/auth-session-status.blade.php'
+rm 'resources/views/components/auth-validation-errors.blade.php'
+rm 'resources/views/components/dropdown-link.blade.php'
+rm 'resources/views/components/dropdown.blade.php'
+rm 'resources/views/components/input-label.blade.php'
+rm 'resources/views/components/nav-link.blade.php'
+rm 'resources/views/components/primary-button.blade.php'
+rm 'resources/views/components/responsive-nav-link.blade.php'
+rm 'resources/views/components/text-input.blade.php'
+rm 'resources/views/dashboard.blade.php'
+rm 'resources/views/kind/create.blade.php'
+rm 'resources/views/kind/edit.blade.php'
+rm 'resources/views/kind/index.blade.php'
+rm 'resources/views/kind/show.blade.php'
+rm 'resources/views/layouts/app.blade.php'
+rm 'resources/views/layouts/guest.blade.php'
+rm 'resources/views/layouts/navigation.blade.php'
+rm 'resources/views/transaction/create.blade.php'
+rm 'resources/views/transaction/edit.blade.php'
+rm 'resources/views/transaction/index.blade.php'
+rm 'resources/views/transaction/show.blade.php'
+rm 'resources/views/welcome.blade.php'
+rm 'routes/api.php'
+rm 'routes/auth.php'
+rm 'routes/channels.php'
+rm 'routes/console.php'
+rm 'routes/web.php'
+rm 'storage/app/.gitignore'
+rm 'storage/app/public/.gitignore'
+rm 'storage/framework/.gitignore'
+rm 'storage/framework/cache/.gitignore'
+rm 'storage/framework/cache/data/.gitignore'
+rm 'storage/framework/sessions/.gitignore'
+rm 'storage/framework/testing/.gitignore'
+rm 'storage/framework/views/.gitignore'
+rm 'storage/logs/.gitignore'
+rm 'tailwind.config.js'
+rm 'tests/CreatesApplication.php'
+rm 'tests/Feature/Auth/AuthenticationTest.php'
+rm 'tests/Feature/Auth/EmailVerificationTest.php'
+rm 'tests/Feature/Auth/PasswordConfirmationTest.php'
+rm 'tests/Feature/Auth/PasswordResetTest.php'
+rm 'tests/Feature/Auth/RegistrationTest.php'
+rm 'tests/Feature/ExampleTest.php'
+rm 'tests/TestCase.php'
+rm 'tests/Unit/ExampleTest.php'
+rm 'vite.config.js'
+rm 'webpack.mix.js'
+(base) ta2ya@a-2 kakeibo % sail node -v
+v16.17.0
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+
+
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.bc48f9bf.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 791 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.80.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                                 
+(base) ta2ya@a-2 kakeibo % sail up -d               
+[+] Running 7/0
+ ⠿ Container kakeibo-redis-1         Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-mailhog-1       Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-selenium-1      Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-meilisearch-1   Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-mysql-1         Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-laravel.test-1  Running                                                                                                                   0.0s
+ ⠿ Container kakeibo-phpmyadmin-1    Running                                                                                                                   0.0s
+(base) ta2ya@a-2 kakeibo % cd .git
+(base) ta2ya@a-2 .git % ls
+COMMIT_EDITMSG  HEAD            config          hooks           info            objects
+FETCH_HEAD      ORIG_HEAD       description     index           logs            refs
+(base) ta2ya@a-2 .git % cd config
+cd: not a directory: config
+(base) ta2ya@a-2 .git % cd config
+cd: not a directory: config
+(base) ta2ya@a-2 .git % cat config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+        ignorecase = true
+        precomposeunicode = true
+[remote "origin"]
+        url = git@github.com:SHIO777/kakeibo.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "develop"]
+        remote = origin
+        merge = refs/heads/develop
+(base) ta2ya@a-2 .git % cat HEAD
+ref: refs/heads/develop
+(base) ta2ya@a-2 .git % cd HEAD
+cd: not a directory: HEAD
+(base) ta2ya@a-2 .git % cat FETCH_HEAD
+658228475cee8318664a918855a068dd6a358eac                branch 'develop' of github.com:SHIO777/kakeibo
+4641da74657aa2c13fd6f86da9bef9a4984c60d2        not-for-merge   branch 'main' of github.com:SHIO777/kakeibo
+(base) ta2ya@a-2 .git % cd ..
+(base) ta2ya@a-2 kakeibo % sail php artisan tinker
+Psy Shell v0.11.8 (PHP 8.1.10 — cli) by Justin Hileman
+>>> Transaction:all()->sortBy("id");
+PHP Error:  Call to undefined function all() in Psy Shell code on line 2
+>>> Transaction::all();
+[!] Aliasing 'Transaction' to 'App\Models\Transaction' for this Tinker session.
+=> Illuminate\Database\Eloquent\Collection {#4612
+     all: [
+       App\Models\Transaction {#4614
+         id: 1,
+         kind_id: 1,
+         category_id: 1,
+         price: 100,
+         date: "2022-09-16",
+         place: "place",
+         note: null,
+         created_at: "2022-09-23 01:21:15",
+         updated_at: "2022-09-23 01:21:15",
+       },
+       App\Models\Transaction {#4615
+         id: 2,
+         kind_id: 2,
+         category_id: 2,
+         price: 10000,
+         date: "2022-09-24",
+         place: "company",
+         note: "y",
+         created_at: "2022-09-23 04:26:51",
+         updated_at: "2022-09-23 04:26:51",
+       },
+       App\Models\Transaction {#4616
+         id: 3,
+         kind_id: 2,
+         category_id: 2,
+         price: 10000,
+         date: "2022-09-21",
+         place: null,
+         note: null,
+         created_at: "2022-09-23 04:48:53",
+         updated_at: "2022-09-23 04:48:53",
+       },
+       App\Models\Transaction {#4617
+         id: 4,
+         kind_id: 1,
+         category_id: 1,
+         price: 100,
+         date: "2022-09-23",
+         place: "Nishitetsu store",
+         note: null,
+         created_at: "2022-09-23 06:13:28",
+         updated_at: "2022-09-23 06:13:28",
+       },
+       App\Models\Transaction {#4618
+         id: 5,
+         kind_id: 1,
+         category_id: 4,
+         price: 1000,
+         date: "2022-09-23",
+         place: "station  -> Tenjin station",
+         note: "Nimoca charge -> Suica",
+         created_at: "2022-09-23 06:15:01",
+         updated_at: "2022-09-23 07:00:19",
+       },
+     ],
+   }
+
+>>> exit
+Exit:  Goodbye
+(base) ta2ya@a-2 kakeibo % docker container ls
+CONTAINER ID   IMAGE                         COMMAND                  CREATED       STATUS                 PORTS                                                  NAMES
+446faa05a9ed   phpmyadmin/phpmyadmin         "/docker-entrypoint.…"   4 hours ago   Up 4 hours             0.0.0.0:8080->80/tcp                                   kakeibo-phpmyadmin-1
+532169ac9df1   sail-8.1/app                  "start-container"        4 hours ago   Up 4 hours             0.0.0.0:80->80/tcp, 0.0.0.0:5173->5173/tcp, 8000/tcp   kakeibo-laravel.test-1
+0c6404e320a9   mysql/mysql-server:8.0        "/entrypoint.sh mysq…"   4 hours ago   Up 4 hours (healthy)   0.0.0.0:3306->3306/tcp, 33060-33061/tcp                kakeibo-mysql-1
+47cad79271aa   selenium/standalone-chrome    "/opt/bin/entry_poin…"   4 hours ago   Up 4 hours             4444/tcp, 5900/tcp                                     kakeibo-selenium-1
+f88cd170d47e   redis:alpine                  "docker-entrypoint.s…"   4 hours ago   Up 4 hours (healthy)   0.0.0.0:6379->6379/tcp                                 kakeibo-redis-1
+329b888c0c04   getmeili/meilisearch:latest   "tini -- /bin/sh -c …"   4 hours ago   Up 4 hours (healthy)   0.0.0.0:7700->7700/tcp                                 kakeibo-meilisearch-1
+ae59f567b30c   mailhog/mailhog:latest        "MailHog"                4 hours ago   Up 4 hours             0.0.0.0:1025->1025/tcp, 0.0.0.0:8025->8025/tcp         kakeibo-mailhog-1
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 2226 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.80.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+10:57:19 AM [vite] page reload resources/views/chartjs.blade.php
+10:57:19 AM [vite] page reload resources/views/chartjs.blade.php
+10:57:28 AM [vite] page reload storage/framework/views/8cdaaa3fd91e37a65625d64c8cc206c7a9ca33d0.php
+^C%                                                                                                                                                                 
+(base) ta2ya@a-2 kakeibo % sail down
+[+] Running 8/8
+ ⠿ Container kakeibo-laravel.test-1  Removed                                                                                                                   1.1s
+ ⠿ Container kakeibo-phpmyadmin-1    Removed                                                                                                                   1.3s
+ ⠿ Container kakeibo-selenium-1      Removed                                                                                                                   4.5s
+ ⠿ Container kakeibo-redis-1         Removed                                                                                                                   0.4s
+ ⠿ Container kakeibo-meilisearch-1   Removed                                                                                                                   0.3s
+ ⠿ Container kakeibo-mailhog-1       Removed                                                                                                                   0.4s
+ ⠿ Container kakeibo-mysql-1         Removed                                                                                                                   1.4s
+ ⠿ Network kakeibo_sail              Removed                                                                                                                   0.1s
+(base) ta2ya@a-2 kakeibo % sail up -d
+[+] Running 8/8
+ ⠿ Network kakeibo_sail              Created                                                                                                                   0.0s
+ ⠿ Container kakeibo-mailhog-1       Started                                                                                                                   0.7s
+ ⠿ Container kakeibo-mysql-1         Started                                                                                                                   0.8s
+ ⠿ Container kakeibo-redis-1         Started                                                                                                                   0.8s
+ ⠿ Container kakeibo-selenium-1      Started                                                                                                                   0.6s
+ ⠿ Container kakeibo-meilisearch-1   Started                                                                                                                   0.9s
+ ⠿ Container kakeibo-phpmyadmin-1    Started                                                                                                                   1.1s
+ ⠿ Container kakeibo-laravel.test-1  Started                                                                                                                   2.3s
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 58 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.4561e03e.js    129.10 KiB / gzip: 46.82 KiB
+(base) ta2ya@a-2 kakeibo % sail npm install && sail npm run build
+
+up to date, audited 95 packages in 783ms
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e7440c92.js    129.05 KiB / gzip: 46.79 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run dev   
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 796 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+11:01:42 AM [vite] page reload resources/views/chartjs.blade.php
+11:02:28 AM [vite] page reload resources/views/chartjs.blade.php (x2)
+c^C%                                                                                                                                                                
+(base) ta2ya@a-2 kakeibo % sail npm install chart.js
+
+up to date, audited 95 packages in 1s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) ta2ya@a-2 kakeibo % npm run dev
+env: node: No such file or directory
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 798 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+11:14:26 AM [vite] page reload routes/web.php
+11:14:51 AM [vite] page reload routes/web.php (x2)
+11:16:18 AM [vite] page reload routes/web.php (x3)
+^C%                                                                                                                                                                 
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 789 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                                 
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 817 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+^C%                                                                                                                                                                 
+(base) ta2ya@a-2 kakeibo % touch webpack.mix.js
+(base) ta2ya@a-2 kakeibo % npm run dev
+env: node: No such file or directory
+(base) ta2ya@a-2 kakeibo % sail npm run dev
+
+> dev
+> vite
+
+
+  VITE v3.1.3  ready in 835 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.96.8:5173/
+
+  LARAVEL v9.31.0  plugin v0.6.1
+
+  ➜  APP_URL: http://localhost
+11:43:37 AM [vite] page reload resources/views/chartjs.blade.php
+^C%                                                                                                                                                         
+(base) ta2ya@a-2 kakeibo % 
+
