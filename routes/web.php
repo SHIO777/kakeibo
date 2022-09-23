@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KindController;
 
@@ -16,9 +17,11 @@ use App\Http\Controllers\KindController;
 */
 
 Route::group(['middleware' => 'auth'], function(){
-    // 所得と支出のカテゴリー
+    // 家計簿を入力するページ
+    Route::resource('transaction', TransactionController::class);
+    // 所得と支出のカテゴリーを追加するページ
     Route::resource('category', CategoryController::class);
-    // 所得か支出の区別
+    // 所得か支出の種類
     Route::resource('kind', KindController::class);
 });
 

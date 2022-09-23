@@ -16,6 +16,19 @@
             {{ __('Dashboard') }}
           </x-nav-link>
         </div>
+        <!-- transaction 一覧ページへのリンクを追加 -->
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
+            {{ __('Transaction Index') }}
+          </x-nav-link>
+        </div>
+        <!-- transaction 作成ページへのリンクを追加 -->
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <x-nav-link :href="route('transaction.create')" :active="request()->routeIs('transaction.create')">
+            {{ __('Transaction Create') }}
+          </x-nav-link>
+        </div>
+
         <!-- category 一覧ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
@@ -90,6 +103,20 @@
         {{ __('Dashboard') }}
       </x-responsive-nav-link>
     </div>
+
+    <!-- Transaction 一覧ページへのリンクを追加 -->
+    <div class="pt-2 pb-3 space-y-1">
+      <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
+        {{ __('Transaction Index') }}
+      </x-responsive-nav-link>
+    </div>
+    <!-- Transaction 作成ページへのリンクを追加 -->
+    <div class="pt-2 pb-3 space-y-1">
+      <x-responsive-nav-link :href="route('transaction.create')" :active="request()->routeIs('transaction.create')">
+        {{ __('Transaction Create') }}
+      </x-responsive-nav-link>
+    </div>
+
     <!-- Category 一覧ページへのリンクを追加 -->
     <div class="pt-2 pb-3 space-y-1">
       <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
