@@ -21,11 +21,12 @@
                 <td class="py-4 px-6 border-b border-grey-light">
                   <a href="{{ route('transaction.show', $transaction->id) }}">
                     <h5 class="text-left text-sm text-grey-dark">{{$transaction->date}}</h5>
-                  @if ($transaction->kind_id === 1)
-                    <h3 class="text-left font-bold text-lg text-rose-500">¥{{$transaction->price}}</h3>                      
-                  @else
-                    <h3 class="text-left font-bold text-lg text-green-500">¥{{$transaction->price}}</h3>
-                  @endif
+                    {{-- <h5 class="text-left text-sm text-grey-dark">{{$transaction}}</h5> --}}
+                    @if ($transaction->kind_id === 1)
+                      <h3 class="text-left font-bold text-lg text-rose-500">¥{{$transaction->price}}</h3>                      
+                    @else
+                      <h3 class="text-left font-bold text-lg text-green-500">¥{{$transaction->price}}</h3>
+                    @endif
                   </a>
 
                   <p class="text-left">{{ $transaction->note }}</p>

@@ -20,7 +20,9 @@ class TransactionController extends Controller
     {
         // 買い物した日付（date）順で並び替える
         $transactions = Transaction::all()->sortBy('date');
-        return view('transaction.index', compact('transactions'));
+        $kinds = Kind::all();
+        $categories = Category::all();
+        return view('transaction.index', compact(['transactions', 'kinds', 'categories']));
     }
 
     /**
@@ -92,7 +94,10 @@ class TransactionController extends Controller
     public function edit($id)
     {
         $transaction = Transaction::find($id);
-        return view('transaction.edit', compact('transaction'));
+        $kinds = Kind::all()->sortBy('id');
+        $categories = Category::all()->sortBy('id');
+        // $category = Category::find($transaction->category_id);
+        return view('transaction.edit', compact(['transaction', 'kinds', 'categories']));
     }
 
     /**
