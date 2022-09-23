@@ -572,3 +572,579 @@ mysql> show tables from kakeibo;
 mysql> exit
 Bye
 (base) ta2ya@a-2 kakeibo %         
+
+
+
+
+
+
+
+
+
+
+
+# migrationをいろいろ
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 80
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show columns from transactions;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> sail php artisan migrate:status
+    -> ^C
+mysql> exit
+Bye
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:status
+
+  Migration name .................................................................................................................... Batch / Status  
+  2014_10_12_000000_create_users_table ..................................................................................................... [1] Ran  
+  2014_10_12_100000_create_password_resets_table ........................................................................................... [1] Ran  
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................... [1] Ran  
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................... [1] Ran  
+  2022_09_21_135959_create_transactions_table .............................................................................................. [2] Ran  
+  2022_09_21_141753_create_categories_table ................................................................................................ [2] Ran  
+  2022_09_22_070659_create_kinds_table ..................................................................................................... [3] Ran  
+  2022_09_22_075326_add_kind_id_to_categories_table ........................................................................................ [4] Ran  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:refresh --step=1 --path=/database/migrations/2022_09_21_135959_create_transactions_table.php 
+
+   ParseError 
+
+  syntax error, unexpected token "}"
+
+  at database/migrations/2022_09_21_135959_create_transactions_table.php:45
+     41▕ 
+     42▕             $table->dropForeign(['category_id']);
+     43▕             $table->dropColumn(['category_id']);
+     44▕         })
+  ➜  45▕     }
+     46▕ };
+     47▕ 
+
+      +32 vendor frames 
+  33  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:refresh --step=1 --path=/database/migrations/2022_09_21_135959_create_transactions_table.php
+
+   INFO  Rolling back migrations.  
+
+  2022_09_22_075326_add_kind_id_to_categories_table ............................................................................ Migration not found  
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % show columns from transactions;
+zsh: command not found: show
+(base) ta2ya@a-2 kakeibo % sail mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 121
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show columns from transactions;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> exit
+Bye
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:status                                                                                      
+
+  Migration name .................................................................................................................... Batch / Status  
+  2014_10_12_000000_create_users_table ..................................................................................................... [1] Ran  
+  2014_10_12_100000_create_password_resets_table ........................................................................................... [1] Ran  
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................... [1] Ran  
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................... [1] Ran  
+  2022_09_21_135959_create_transactions_table .............................................................................................. [2] Ran  
+  2022_09_21_141753_create_categories_table ................................................................................................ [2] Ran  
+  2022_09_22_070659_create_kinds_table ..................................................................................................... [3] Ran  
+  2022_09_22_075326_add_kind_id_to_categories_table ........................................................................................ [4] Ran  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:refresh --step=2 --path=/database/migrations/2022_09_21_135959_create_transactions_table.php
+
+   INFO  Rolling back migrations.  
+
+  2022_09_22_075326_add_kind_id_to_categories_table ............................................................................ Migration not found  
+  2022_09_22_070659_create_kinds_table ......................................................................................... Migration not found  
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 148
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show columns from transactions;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at | timestamp       | YES  |     | NULL    |                |
+| updated_at | timestamp       | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> exit
+Bye
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:status                                                                                      
+
+  Migration name .................................................................................................................... Batch / Status  
+  2014_10_12_000000_create_users_table ..................................................................................................... [1] Ran  
+  2014_10_12_100000_create_password_resets_table ........................................................................................... [1] Ran  
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................... [1] Ran  
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................... [1] Ran  
+  2022_09_21_135959_create_transactions_table .............................................................................................. [2] Ran  
+  2022_09_21_141753_create_categories_table ................................................................................................ [2] Ran  
+  2022_09_22_070659_create_kinds_table ..................................................................................................... [3] Ran  
+  2022_09_22_075326_add_kind_id_to_categories_table ........................................................................................ [4] Ran  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:refresh --step=2 --path=/database/migrations/2022_09_21_135959_create_transactions_table.php
+
+   INFO  Rolling back migrations.  
+
+  2022_09_22_075326_add_kind_id_to_categories_table ............................................................................ Migration not found  
+  2022_09_22_070659_create_kinds_table ......................................................................................... Migration not found  
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:refresh --step=2 --path=/database/migrations/2022_09_21_135959_create_transactions_table.php
+
+   INFO  Rolling back migrations.  
+
+  2022_09_22_075326_add_kind_id_to_categories_table ............................................................................ Migration not found  
+  2022_09_22_070659_create_kinds_table ......................................................................................... Migration not found  
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:status                                                                                      
+
+  Migration name .................................................................................................................... Batch / Status  
+  2014_10_12_000000_create_users_table ..................................................................................................... [1] Ran  
+  2014_10_12_100000_create_password_resets_table ........................................................................................... [1] Ran  
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................... [1] Ran  
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................... [1] Ran  
+  2022_09_21_135959_create_transactions_table .............................................................................................. [2] Ran  
+  2022_09_21_141753_create_categories_table ................................................................................................ [2] Ran  
+  2022_09_22_070659_create_kinds_table ..................................................................................................... [3] Ran  
+  2022_09_22_075326_add_kind_id_to_categories_table ........................................................................................ [4] Ran  
+
+(base) ta2ya@a-2 kakeibo % sail mysql                     
+kkReading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1005
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show columns from categories;
++-------------+-----------------+------+-----+---------+----------------+
+| Field       | Type            | Null | Key | Default | Extra          |
++-------------+-----------------+------+-----+---------+----------------+
+| id          | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| kind_id     | bigint unsigned | YES  | MUL | NULL    |                |
+| category    | varchar(255)    | NO   |     | NULL    |                |
+| description | text            | YES  |     | NULL    |                |
+| created_at  | timestamp       | YES  |     | NULL    |                |
+| updated_at  | timestamp       | YES  |     | NULL    |                |
++-------------+-----------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> exit
+Bye
+(base) ta2ya@a-2 kakeibo %                           
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % 
+(base) ta2ya@a-2 kakeibo % DBwo
+zsh: command not found: DBwo
+(base) ta2ya@a-2 kakeibo % DBをfreshする
+zsh: command not found: DBをfreshする
+(base) ta2ya@a-2 kakeibo % php artisan migrate:fresh --seed
+zsh: command not found: php
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:fresh --seed
+
+  Dropping all tables ................................................................................................................... 163ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ............................................................................................................... 30ms DONE
+
+   INFO  Running migrations.  
+
+  2014_10_12_000000_create_users_table ................................................................................................... 46ms DONE
+  2014_10_12_100000_create_password_resets_table ......................................................................................... 28ms DONE
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................. 34ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................. 50ms DONE
+  2022_09_21_135959_create_transactions_table ............................................................................................. 5ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') default character set utf8mb4 collate 'utf8mb4_unicode_ci'' at line 1 (SQL: create table `transactions` () default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_21_135959_create_transactions_table.php:26
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +36 vendor frames 
+  47  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:fresh --seed
+
+  Dropping all tables .................................................................................................................... 87ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ............................................................................................................... 28ms DONE
+
+   INFO  Running migrations.  
+
+  2014_10_12_000000_create_users_table ................................................................................................... 42ms DONE
+  2014_10_12_100000_create_password_resets_table ......................................................................................... 31ms DONE
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................. 31ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................. 47ms DONE
+  2022_09_21_135959_create_transactions_table ............................................................................................. 1ms DONE
+  2022_09_21_141753_create_categories_table ............................................................................................... 0ms DONE
+  2022_09_22_070659_create_kinds_table .................................................................................................... 0ms DONE
+  2022_09_22_075326_add_kind_id_to_categories_table ....................................................................................... 0ms DONE
+
+   INFO  Seeding database.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:mode Kind -m
+
+   ERROR  Model already exists.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:mode Kind -m
+
+   INFO  Model created successfully.  
+
+   INFO  Created migration [2022_09_22_233744_create_kinds_table].  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate          
+
+   INFO  Running migrations.  
+
+  2022_09_22_233744_create_kinds_table ................................................................................................... 33ms DONE
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:mode Category -m
+
+   INFO  Model created successfully.  
+
+   INFO  Created migration [2022_09_22_233959_create_categories_table].  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate              
+
+   INFO  Running migrations.  
+
+  2022_09_22_233959_create_categories_table .............................................................................................. 14ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after `id`, `category` varchar(255) not null, `description` text null, `created_' at line 1 (SQL: create table `categories` (`id` bigint unsigned not null auto_increment primary key, `kind_id` bigint unsigned not null after `id`, `category` varchar(255) not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_22_233959_create_categories_table.php:22
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Running migrations.  
+
+  2022_09_22_233959_create_categories_table .............................................................................................. 13ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after `id`, `category` varchar(255) not null, `description` text null, `created_' at line 1 (SQL: create table `categories` (`id` bigint unsigned not null auto_increment primary key, `kind_id` bigint unsigned not null after `id`, `category` varchar(255) not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_22_233959_create_categories_table.php:22
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Running migrations.  
+
+  2022_09_22_233959_create_categories_table .............................................................................................. 12ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after `id`, `category` varchar(255) not null, `description` text null, `created_' at line 1 (SQL: create table `categories` (`id` bigint unsigned not null auto_increment primary key, `kind_id` bigint unsigned null after `id`, `category` varchar(255) not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_22_233959_create_categories_table.php:22
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Running migrations.  
+
+  2022_09_22_233959_create_categories_table .............................................................................................. 15ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after `id`, `category` varchar(255) not null, `description` text null, `created_' at line 1 (SQL: create table `categories` (`id` bigint unsigned not null auto_increment primary key, `kind_id` bigint unsigned not null after `id`, `category` varchar(255) not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_22_233959_create_categories_table.php:22
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Running migrations.  
+
+  2022_09_22_233959_create_categories_table .............................................................................................. 69ms DONE
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate:fresh --seed 
+
+  Dropping all tables ................................................................................................................... 101ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ............................................................................................................... 26ms DONE
+
+   INFO  Running migrations.  
+
+  2014_10_12_000000_create_users_table ................................................................................................... 38ms DONE
+  2014_10_12_100000_create_password_resets_table ......................................................................................... 29ms DONE
+  2019_08_19_000000_create_failed_jobs_table ............................................................................................. 32ms DONE
+  2019_12_14_000001_create_personal_access_tokens_table .................................................................................. 44ms DONE
+  2022_09_21_135959_create_transactions_table ............................................................................................. 0ms DONE
+  2022_09_21_141753_create_categories_table ............................................................................................... 0ms DONE
+  2022_09_22_070659_create_kinds_table ................................................................................................... 19ms DONE
+  2022_09_22_075326_add_kind_id_to_categories_table ....................................................................................... 0ms DONE
+  2022_09_22_233744_create_kinds_table .................................................................................................... 0ms DONE
+  2022_09_22_233959_create_categories_table ............................................................................................... 0ms DONE
+
+   INFO  Seeding database.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:model Kind -m  
+
+   INFO  Model created successfully.  
+
+   INFO  Created migration [2022_09_23_000144_create_kinds_table].  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate             
+
+   INFO  Running migrations.  
+
+  2022_09_23_000144_create_kinds_table .................................................................................................... 9ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'kinds' already exists (SQL: create table `kinds` (`id` bigint unsigned not null auto_increment primary key, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_23_000144_create_kinds_table.php:19
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate            
+
+   INFO  Nothing to migrate.  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:model Category -m
+
+   INFO  Model created successfully.  
+
+   INFO  Created migration [2022_09_23_001015_create_categories_table].  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate               
+
+   INFO  Running migrations.  
+
+  2022_09_23_001015_create_categories_table .............................................................................................. 65ms DONE
+
+(base) ta2ya@a-2 kakeibo % sail php artisan make:model Transaction -m
+
+   INFO  Model created successfully.  
+
+   INFO  Created migration [2022_09_23_001302_create_transactions_table].  
+
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate                  
+
+   INFO  Running migrations.  
+
+  2022_09_23_001302_create_transactions_table ............................................................................................ 16ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'after `kind_id`, `price` int not null, `date` date not null, `place` varchar(255' at line 1 (SQL: create table `transactions` (`id` bigint unsigned not null auto_increment primary key, `kind_id` bigint unsigned not null, `category_id` bigint unsigned not null after `kind_id`, `price` int not null, `date` date not null, `place` varchar(255) null, `note` varchar(255) null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:759
+    755▕         // If an exception occurs when attempting to run a query, we'll format the error
+    756▕         // message to include the bindings with SQL, which will make this exception a
+    757▕         // lot more helpful to the developer instead of just the database's errors.
+    758▕         catch (Exception $e) {
+  ➜ 759▕             throw new QueryException(
+    760▕                 $query, $this->prepareBindings($bindings), $e
+    761▕             );
+    762▕         }
+    763▕     }
+
+      +9 vendor frames 
+  10  database/migrations/2022_09_23_001302_create_transactions_table.php:26
+      Illuminate\Support\Facades\Facade::__callStatic()
+
+      +25 vendor frames 
+  36  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+(base) ta2ya@a-2 kakeibo % sail php artisan migrate
+
+   INFO  Running migrations.  
+
+  2022_09_23_001302_create_transactions_table ........................................................................................... 103ms DONE
+
+(base) ta2ya@a-2 kakeibo % 
