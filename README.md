@@ -8,7 +8,7 @@
 - 色々アイコン追加
 
 # Tech
-- Flamework
+- Framework
     - Laravel (PHP framework)
 - Design
     - Tailwind CSS
