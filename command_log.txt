@@ -1148,3 +1148,183 @@ zsh: command not found: php
   2022_09_23_001302_create_transactions_table ........................................................................................... 103ms DONE
 
 (base) ta2ya@a-2 kakeibo % 
+
+
+
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.8aeb97a6.css   24.46 KiB / gzip: 4.97 KiB
+public/build/assets/app.ab93cf8a.js    129.03 KiB / gzip: 46.78 KiB
+(base) ta2ya@a-2 kakeibo % git status 
+On branch develop
+Your branch is ahead of 'origin/develop' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   app/Http/Controllers/TransactionController.php
+        modified:   resources/views/transaction/index.blade.php
+        modified:   resources/views/transaction/show.blade.php
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(base) ta2ya@a-2 kakeibo % git add .
+(base) ta2ya@a-2 kakeibo % git status
+On branch develop
+Your branch is ahead of 'origin/develop' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   app/Http/Controllers/TransactionController.php
+        modified:   resources/views/transaction/index.blade.php
+        modified:   resources/views/transaction/show.blade.php
+
+(base) ta2ya@a-2 kakeibo % git restore --staged resources/views/transaction/show.blade.php 
+(base) ta2ya@a-2 kakeibo % git status                                                     
+On branch develop
+Your branch is ahead of 'origin/develop' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   app/Http/Controllers/TransactionController.php
+        modified:   resources/views/transaction/index.blade.php
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   resources/views/transaction/show.blade.php
+
+(base) ta2ya@a-2 kakeibo % sail down                                                      
+[+] Running 7/7
+[+] Running 8/8keibo-laravel.test-1  Removed                                                                                                         1.2s
+ ⠿ Container kakeibo-laravel.test-1  Removed                                                                                                         1.2s
+ ⠿ Container kakeibo-phpmyadmin-1    Removed                                                                                                         1.3s
+ ⠿ Container kakeibo-mailhog-1       Removed                                                                                                         0.3s
+ ⠿ Container kakeibo-redis-1         Removed                                                                                                         0.3s
+ ⠿ Container kakeibo-meilisearch-1   Removed                                                                                                         0.3s
+ ⠿ Container kakeibo-selenium-1      Removed                                                                                                         4.2s
+ ⠿ Container kakeibo-mysql-1         Removed                                                                                                         1.8s
+ ⠿ Network kakeibo_sail              Removed                                                                                                         0.1s
+(base) ta2ya@a-2 kakeibo % sail down
+(base) ta2ya@a-2 kakeibo % sail up -d
+[+] Running 6/6
+[+] Running 3/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 3/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 3/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 3/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 4/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 5/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 6/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 6/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 6/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 7/8ibo_sail              Created                                                                                                         0.0s
+[+] Running 8/8ibo_sail              Created                                                                                                         0.0s
+ ⠿ Network kakeibo_sail              Created                                                                                                         0.0s
+ ⠿ Container kakeibo-selenium-1      Started                                                                                                         0.6s
+ ⠿ Container kakeibo-mysql-1         Started                                                                                                         0.9s
+ ⠿ Container kakeibo-redis-1         Started                                                                                                         0.8s
+ ⠿ Container kakeibo-mailhog-1       Started                                                                                                         0.8s
+ ⠿ Container kakeibo-meilisearch-1   Started                                                                                                         0.7s
+ ⠿ Container kakeibo-laravel.test-1  Started                                                                                                         2.4s
+ ⠿ Container kakeibo-phpmyadmin-1    Started                                                                                                         1.1s
+(base) ta2ya@a-2 kakeibo % sail down
+[+] Running 7/7
+[+] Running 8/8keibo-laravel.test-1  Removed                                                                                                         0.2s
+ ⠿ Container kakeibo-laravel.test-1  Removed                                                                                                         0.2s
+ ⠿ Container kakeibo-phpmyadmin-1    Removed                                                                                                         1.2s
+ ⠿ Container kakeibo-mailhog-1       Removed                                                                                                         0.2s
+ ⠿ Container kakeibo-selenium-1      Removed                                                                                                         4.5s
+ ⠿ Container kakeibo-redis-1         Removed                                                                                                         0.3s
+ ⠿ Container kakeibo-meilisearch-1   Removed                                                                                                         0.3s
+ ⠿ Container kakeibo-mysql-1         Removed                                                                                                         1.4s
+ ⠿ Network kakeibo_sail              Removed                                                                                                         0.1s
+(base) ta2ya@a-2 kakeibo % 
+ *  History restored 
+
+(base) ta2ya@a-2 kakeibo % sail up -d
+[+] Running 8/8
+ ⠿ Network kakeibo_sail              Created                                                                                                                                                0.0s
+ ⠿ Container kakeibo-selenium-1      Started                                                                                                                                                1.1s
+ ⠿ Container kakeibo-mysql-1         Started                                                                                                                                                1.1s
+ ⠿ Container kakeibo-mailhog-1       Started                                                                                                                                                1.1s
+ ⠿ Container kakeibo-redis-1         Started                                                                                                                                                1.1s
+ ⠿ Container kakeibo-meilisearch-1   Started                                                                                                                                                1.0s
+ ⠿ Container kakeibo-laravel.test-1  Started                                                                                                                                                2.5s
+ ⠿ Container kakeibo-phpmyadmin-1    Started                                                                                                                                                1.3s
+(base) ta2ya@a-2 kakeibo % sail down
+[+] Running 8/8
+ ⠿ Container kakeibo-laravel.test-1  Removed                                                                                                                                                0.9s
+ ⠿ Container kakeibo-phpmyadmin-1    Removed                                                                                                                                                1.4s
+ ⠿ Container kakeibo-mailhog-1       Removed                                                                                                                                                0.2s
+ ⠿ Container kakeibo-selenium-1      Removed                                                                                                                                                4.7s
+ ⠿ Container kakeibo-redis-1         Removed                                                                                                                                                0.3s
+ ⠿ Container kakeibo-meilisearch-1   Removed                                                                                                                                                0.4s
+ ⠿ Container kakeibo-mysql-1         Removed                                                                                                                                                1.7s
+ ⠿ Network kakeibo_sail              Removed                                                                                                                                                0.1s
+(base) ta2ya@a-2 kakeibo % sail up -d
+[+] Running 8/8
+ ⠿ Network kakeibo_sail              Created                                                                                                                                                0.0s
+ ⠿ Container kakeibo-meilisearch-1   Started                                                                                                                                                0.8s
+ ⠿ Container kakeibo-selenium-1      Started                                                                                                                                                0.8s
+ ⠿ Container kakeibo-mailhog-1       Started                                                                                                                                                0.9s
+ ⠿ Container kakeibo-mysql-1         Started                                                                                                                                                0.9s
+ ⠿ Container kakeibo-redis-1         Started                                                                                                                                                0.8s
+ ⠿ Container kakeibo-phpmyadmin-1    Started                                                                                                                                                1.1s
+ ⠿ Container kakeibo-laravel.test-1  Started                                                                                                                                                2.3s
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.4650bfb0.css   24.64 KiB / gzip: 5.02 KiB
+public/build/assets/app.ab93cf8a.js    129.03 KiB / gzip: 46.78 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 59 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.ca98b17b.css   24.54 KiB / gzip: 4.99 KiB
+public/build/assets/app.ab93cf8a.js    129.03 KiB / gzip: 46.78 KiB
+(base) ta2ya@a-2 kakeibo % sail npm run build
+
+> build
+> vite build
+
+vite v3.1.3 building for production...
+✓ 57 modules transformed.
+public/build/manifest.json             0.25 KiB
+public/build/assets/app.71598dc1.css   24.63 KiB / gzip: 4.99 KiB
+public/build/assets/app.e8b13026.js    129.13 KiB / gzip: 46.78 KiB
+(base) ta2ya@a-2 kakeibo % sail npm install chart.js
+
+added 1 package, and audited 95 packages in 6s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) ta2ya@a-2 kakeibo % 
