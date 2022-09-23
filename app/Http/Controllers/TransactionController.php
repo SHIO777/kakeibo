@@ -64,7 +64,7 @@ class TransactionController extends Controller
         // 戻り値は挿入されたレコードの情報
         $result = Transaction::create($request->all());
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
-        return redirect()->route('category.index');
+        return redirect()->route('transaction.index');
     }
 
     /**
@@ -76,6 +76,8 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::find($id);
+        ddd($transaction);
+        // ddd($transaction->all()->kind_id);
         return view('transaction.show', compact('transaction'));
     }
 
