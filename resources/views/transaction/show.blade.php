@@ -14,7 +14,7 @@
             {{-- <h3 class="text-left font-bold text-lg text-grey-darkset">{{$transaction->date}}</h3>                      
               <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">Price</p> --}}
               <h5 class="text-left text-sm text-grey-dark">{{$transaction->date}}</h5>
-              <h5 class="text-left text-sm text-grey-dark">{{$transaction->kind}} > {{ $transaction->category }}</h5>
+              <h5 class="text-left text-sm text-grey-dark">{{$kind->kind}} > {{ $category->category }}</h5>
               <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">Price</p>
                 @if ($transaction->kind_id === 1)
                 <p class="py-2 px-3 font-bold text-lg text-rose-500" id="price">¥{{$transaction->price}}</p>

@@ -76,9 +76,11 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::find($id);
-        ddd($transaction);
+        $kind = Kind::find($transaction->kind_id);
+        $category = Category::find($transaction->category_id);
+        // ddd($transaction);
         // ddd($transaction->all()->kind_id);
-        return view('transaction.show', compact('transaction'));
+        return view('transaction.show', compact(['transaction', 'kind', 'category']));
     }
 
     /**
