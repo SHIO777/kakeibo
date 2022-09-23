@@ -50,8 +50,8 @@ class CategoryController extends Controller
         // バリデーション
         // dd($request);
         $validator = Validator::make($request->all(), [
-            'kind_id' => 'required | max:100',
-            'category' => 'required | max:100',
+            'kind_id' => 'required',
+            'category' => 'required',
             'description' => 'required',
         ]);
         // バリデーション:エラー
