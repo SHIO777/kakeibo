@@ -1,3 +1,13 @@
+
+
+# TODO
+- chartjs 導入
+- ページネーション
+- 非同期通信
+- 必須入力フィールドにマーク
+- 色々アイコン追加
+
+
 # Command
 ```
 // show routing table
