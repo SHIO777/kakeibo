@@ -20,4 +20,14 @@ class Transaction extends Model
     //     // selfはKindモデルのこと
     //     return self::orderBy('updated_at', 'desc')->get();
     // }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function kind()
+    {
+        return $this->belongsTo(Kind::class);
+    }
 }
