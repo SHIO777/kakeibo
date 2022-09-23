@@ -19,13 +19,16 @@
               @foreach ($transactions as $transaction)
               <tr class="hover:bg-grey-lighter">
                 <td class="py-4 px-6 border-b border-grey-light">
+                  <a href="{{ route('transaction.show', $transaction->id) }}">
+                    <h5 class="text-left text-sm text-grey-dark">{{$transaction->date}}</h5>
                   @if ($transaction->kind_id === 1)
-                    <h3 class="text-left font-bold text-lg text-rose-500">{{$transaction->transaction}}</h3>                      
+                    <h3 class="text-left font-bold text-lg text-rose-500">¥{{$transaction->price}}</h3>                      
                   @else
-                    <h3 class="text-left font-bold text-lg text-green-500">{{$transaction->transaction}}</h3>
+                    <h3 class="text-left font-bold text-lg text-green-500">¥{{$transaction->price}}</h3>
                   @endif
+                  </a>
 
-                  <p class="text-left">{{ $transaction->description }}</p>
+                  <p class="text-left">{{ $transaction->note }}</p>
                   <div class="flex">
                     <!-- 更新ボタン -->
                     <form action="{{ route('transaction.edit',$transaction->id) }}" method="GET" class="text-left">
