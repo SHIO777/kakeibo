@@ -22,6 +22,30 @@ This repository for 家計簿 Kakeibo (household accounts in Japanese) web appli
 using Laravel (PHP framework).
 This application allows you to record and analyze your daily income and expenses.
 
+# laravel-mix
+Please add line below to package.json
+
+```
+// laravel-your-project/package.json
+
+{
+    ...
+    omitted
+    ...
+    },
+    "devDependencies": {
+        ...
+        omitted
+        ...
+        "laravel-mix": "^6.0.49",
+        ...
+    },
+    "dependencies": {
+        "chart.js": "^3.9.1"
+    }
+}
+```
+
 
 # Command
 ```
