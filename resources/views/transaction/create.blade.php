@@ -23,13 +23,34 @@
               </select>
             </div>
 
+            {{-- Categoryを選択 --}}
             <div class="flex flex-col mb-4">
-              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="category">Category</label>
-              <input class="border py-2 px-3 text-grey-darkest" type="text" name="category" id="category" value="{{ old('category') }}">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Category</label>
+              <select name="kind_id" id="kind_id">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
+                @endforeach
+              </select>
             </div>
+
             <div class="flex flex-col mb-4">
-              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="description">Description</label>
-              <input class="border py-2 px-3 text-grey-darkest" type="text" name="description" id="description" value="{{ old('description') }}">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="price">Price</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="number" min="0" step="1" name="price" id="price" value="{{ old('price') }}">
+            </div>
+
+            <div class="flex flex-col mb-4">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="date">Date</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="date" name="date" id="date" value="{{ old('date') }}">
+            </div>
+
+            <div class="flex flex-col mb-4">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="place">Place</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="text" name="place" id="place" value="{{ old('place') }}">
+            </div>
+
+            <div class="flex flex-col mb-4">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="note">Note</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="text" name="note" id="note" value="{{ old('note') }}">
             </div>
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create
