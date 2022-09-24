@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 .DS_Store
 command_log.txt
+selenium.ipynb
