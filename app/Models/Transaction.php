@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    use HasFactory;
-    
+    use HasFactory;     // required to generate seed data
+
     protected $guarded = [
         'id',
         'created_at',
