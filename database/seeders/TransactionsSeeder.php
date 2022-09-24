@@ -1,5 +1,6 @@
 <?php
 // sail php artisan make:seeder TransactionsSeeder
+// to generate seed data -> sail php artisan db:seed --class=TransactionsSeeder
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,6 +16,6 @@ class TransactionsSeeder extends Seeder
      */
     public function run()
     {
-        Transaction::factory()->count(5)->create();
+        Transaction::factory()->count(10)->create();
     }
 }
