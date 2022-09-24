@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    use HasFactory;     // required to generate seed data
+
     protected $guarded = [
         'id',
         'created_at',
@@ -20,4 +22,14 @@ class Transaction extends Model
     //     // selfはKindモデルのこと
     //     return self::orderBy('updated_at', 'desc')->get();
     // }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function kind()
+    {
+        return $this->belongsTo(Kind::class);
+    }
 }

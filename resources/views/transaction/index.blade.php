@@ -12,7 +12,7 @@
           <table class="text-center w-full border-collapse">
             <thead>
               <tr>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">Category</th>
+                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">Transaction</th>
               </tr>
             </thead>
             <tbody>
@@ -21,11 +21,22 @@
                 <td class="py-4 px-6 border-b border-grey-light">
                   <a href="{{ route('transaction.show', $transaction->id) }}">
                     <h5 class="text-left text-sm text-grey-dark">{{$transaction->date}}</h5>
-                  @if ($transaction->kind_id === 1)
-                    <h3 class="text-left font-bold text-lg text-rose-500">¥{{$transaction->price}}</h3>                      
-                  @else
-                    <h3 class="text-left font-bold text-lg text-green-500">¥{{$transaction->price}}</h3>
-                  @endif
+                    {{-- <h5 class="text-left text-sm text-grey-dark">{{$transaction}}</h5> --}}
+                    {{-- 6.15 投稿者名の表示: 多対1 belongs to $transaction->function->column name --}}
+                    <h5 class="text-left text-sm text-grey-dark">
+                      @if ($transaction->kind_id === 1)
+                        <span class="bg-rose-500 text-white">{{ $transaction->kind->kind }}</span>
+                      @else
+                        <span class="bg-green-500 text-white">{{ $transaction->kind->kind }}</span>
+                      @endif              
+                       > 
+                       {{ $transaction->category->category}}
+                    </h5>
+                    @if ($transaction->kind_id === 1)
+                      <h3 class="text-left font-bold text-lg text-rose-500">¥{{$transaction->price}}</h3>                      
+                    @else
+                      <h3 class="text-left font-bold text-lg text-green-500">¥{{$transaction->price}}</h3>
+                    @endif
                   </a>
 
                   <p class="text-left">{{ $transaction->note }}</p>

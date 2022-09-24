@@ -23,11 +23,16 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('category', CategoryController::class);
     // 所得か支出の種類
     Route::resource('kind', KindController::class);
+    // chartjs page
+    // Route::get('/chartjs', function() {return view('chartjs');});
+
 });
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/chartjs', function() {return view('chartjs');});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
