@@ -23,6 +23,8 @@ class TransactionController extends Controller
             ->find(Auth::user()->id)
             ->userTransactions()
             ->orderByDesc('date')       // 買い物した日付（date）順で並び替える
+            ->with('kind')              // eager loading for preventing lazy loading
+            ->with('category')
             ->get();
         $kinds = Kind::all();
         $categories = Category::all();
