@@ -52,7 +52,9 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="note">Note</label>
               <input class="border py-2 px-3 text-grey-darkest" type="text" name="note" id="note" value="{{ old('note') }}">
             </div>
-            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+
+            {{-- <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"> --}}
+            <button type="submit" onclick="confirm()" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create
             </button>
           </form>
