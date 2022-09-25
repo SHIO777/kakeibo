@@ -1,11 +1,16 @@
 
 
 # TODO
-- chartjs 導入
+- [ ] chartjs 導入
+- [x] ページネーション
+- [ ] 非同期通信
+- [ ] 必須入力フィールドにマーク
+- [ ] 色々アイコン追加
+
+# 工夫した点
 - ページネーション
-- 非同期通信
-- 必須入力フィールドにマーク
-- 色々アイコン追加
+- jsと連携しセレクトボックスを動的に変更
+- {{ old('name') }}ヘルパーを使用して，直前の値を復活させる．
 
 # Tech
 - Framework
@@ -23,6 +28,12 @@ using Laravel (PHP framework).
 This application allows you to record and analyze your daily income and expenses.
 
 # Seed data
+
+```
+sail php artisan migrate:fresh
+
+sail php artisan db:seed --class=DatabaseSeeder && sail php artisan db:seed --class=KindsSeeder && sail php artisan db:seed --class=CategoriesSeeder && sail php artisan db:seed --class=TransactionsSeeder
+```
 
 ## using faker data
 To use faker data, you need to create Factory file.

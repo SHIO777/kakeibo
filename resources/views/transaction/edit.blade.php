@@ -5,6 +5,46 @@
     </h2>
   </x-slot>
 
+  <x-slot name="javascript">
+    const kindId = document.getElementById('kind_id');                // 現在のkind_idを取得
+    const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
+    const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
+
+    {{-- console.log({{ old('kind_id') }}) --}}
+    {{-- console.log({{ old('category_id') }}) --}}
+
+    // kindIdに直前の値を設定．直前の値が保存されていなければ初期値をDBに保存されている設定
+    kindId.value = {{ old('kind_id', $transaction->kind_id) }};
+    // 現在のkindIdに対応するcategoryオプションを生成
+    setCategoryOptions(kindId.value);
+    // selectCategoryに直前の値を設定．初期値はDBに保存されている値．
+    selectCategory.value = {{ old('category_id', $transaction->category_id) }};
+
+    console.log(category);
+
+    function setCategoryOptions(currentKindId) {
+      // セレクトボックスの初期値を全てクリア
+      while (selectCategory.lastChild) {
+        selectCategory.removeChild(selectCategory.lastChild);
+      }
+
+      for (let i=0; i<category.length; i++) {
+        if (parseInt(currentKindId) == parseInt(category[i].kind_id)) {
+          const option = document.createElement('option');    // option要素を新しく作る
+          option.value = category[i].id;              // valueにcategory_idを指定
+          option.innerHTML = category[i].id + ": " + category[i].category;    // ユーザー向けの表示としてカテゴリ名を表示
+          selectCategory.appendChild(option);
+        }
+      }
+    }
+    // Kind (payment/income)が変更されたら処理を行う
+    kindId.addEventListener('change', (e) => {
+      // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
+      setCategoryOptions(e.target.value);
+    })
+
+  </x-slot>
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -15,17 +55,11 @@
             @csrf
 
             {{-- PaymentかIncomeを選択 --}}
-            {{-- TODO: 元のvalueをselected --}}
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Kind</label>
               <select name="kind_id" id="kind_id">
                 @foreach ($kinds as $kind)
-                    @if ($transaction->kind_id === $kind->id)
-                        <option value="{{ $kind->id }}" selected>{{ $kind->id }}: {{ $kind->kind }}</option>
-                    @else
-                        <option value="{{ $kind->id }}">{{ $kind->id }}: {{ $kind->kind }}</option>                        
-                    @endif
-
+                  <option value="{{ $kind->id }}">{{ $kind->id }}: {{ $kind->kind }}</option>                        
                 @endforeach
               </select>
             </div>
@@ -35,11 +69,7 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Category</label>
               <select name="category_id" id="category_id">
                 @foreach ($categories as $category)
-                    @if ($transaction->category_id === $category->id)
-                        <option value="{{ $category->id }}" selected>{{ $category->id }}: {{ $category->category }}</option>                        
-                    @else
-                        <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>                        
-                    @endif
+                  <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>                        
                 @endforeach
               </select>
             </div>

@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             // // $table->foreignId('kind_id')->after('id')->nullable()->constrained('kind')->cascadeOnDelete();
-            $table->foreignId('kind_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('kind_id')->constrained('kinds')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->integer('price');
             $table->date('date');
             $table->string('place')->nullable();

@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('category', CategoryController::class);
     // 所得か支出の種類
     Route::resource('kind', KindController::class);
+    // Route::post('/post/kind', AjaxController@getCategory)->name('post.getCategory');
     // chartjs page
     // Route::get('/chartjs', function() {return view('chartjs');});
 

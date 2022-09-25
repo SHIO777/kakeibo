@@ -11,8 +11,13 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <script src="{{ mix('/js/app.js') }}"></script>
+
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
         {{-- <script src="{{ mix('/js/test.js') }}"></script> --}}
+        
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -31,7 +36,12 @@
             </main>
         </div>
     </body>
-    {{-- <script type="text/javascript">
-        {{ $javascript }}
-    </script> --}}
+    {{-- @if (Request::is('transaction/create')|Request::is('transaction/*/edit')) --}}
+    {{-- @if (Request::routeIs('transaction.create')|Request::routeIs('transaction.edit')) --}}
+    @if (Request::routeIs('transaction.create')||Request::routeIs('transaction.edit'))
+        <script type="text/javascript">
+            {{ $javascript }}
+        </script>
+    @endif
+
 </html>

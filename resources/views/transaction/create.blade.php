@@ -5,6 +5,47 @@
     </h2>
   </x-slot>
 
+  <x-slot name="javascript">
+    const kindId = document.getElementById('kind_id');                // 現在のkind_idを取得
+    const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
+    const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
+
+    {{-- console.log({{ old('kind_id') }}) --}}
+    {{-- console.log({{ old('category_id') }}) --}}
+
+    // kindIdに直前の値を設定．直前の値が保存されていなければ初期値を1に設定
+    kindId.value = {{ old('kind_id', 1) }};
+    // 現在のkindIdに対応するcategoryオプションを生成
+    setCategoryOptions(kindId.value);
+    // selectCategoryに直前の値を設定．初期値1
+    selectCategory.value = {{ old('category_id', 1) }};
+
+    console.log(category);
+
+    function setCategoryOptions(currentKindId) {
+      // セレクトボックスの初期値を全てクリア
+      while (selectCategory.lastChild) {
+        selectCategory.removeChild(selectCategory.lastChild);
+      }
+
+      for (let i=0; i<category.length; i++) {
+        {{-- console.log(typeof(currentKindId), typeof(category[i].kind_id)) // ->string number --}}
+        if (parseInt(currentKindId) == parseInt(category[i].kind_id)) {
+          const option = document.createElement('option');    // option要素を新しく作る
+          option.value = category[i].id;              // valueにcategory_idを指定
+          option.innerHTML = category[i].id + ": " + category[i].category;    // ユーザー向けの表示としてカテゴリ名を表示
+          selectCategory.appendChild(option);
+        }
+      }
+    }
+    // Kind (payment/income)が変更されたら処理を行う
+    kindId.addEventListener('change', (e) => {
+      // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
+      setCategoryOptions(e.target.value);
+    })
+
+  </x-slot>
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -28,7 +69,7 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Category</label>
               <select name="category_id" id="category_id">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
+                  <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
                 @endforeach
               </select>
             </div>
@@ -52,6 +93,8 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="note">Note</label>
               <input class="border py-2 px-3 text-grey-darkest" type="text" name="note" id="note" value="{{ old('note') }}">
             </div>
+
+            {{-- <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"> --}}
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create
             </button>
