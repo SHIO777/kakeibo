@@ -33,9 +33,7 @@
     </body>
     @if (Request::is('transaction/create'))
         <script type="text/javascript">
-            function confirm() {
-                alert('Are you okay?');
-            }
+            {{ $javascript }}
         </script>
     @endif
 

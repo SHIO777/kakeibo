@@ -5,6 +5,17 @@
     </h2>
   </x-slot>
 
+  <x-slot name="javascript">
+    let category = [];
+    @foreach ($categories as $category)
+      category.push("{{ $category->category }}");
+    @endforeach
+    console.log(category);
+    {{-- console.log({{ $categories }}); --}}
+    {{-- $categories --}}
+    {{-- {{ $categories }} --}}
+  </x-slot>
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
