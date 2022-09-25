@@ -6,14 +6,12 @@
   </x-slot>
 
   <x-slot name="javascript">
-    let category = [];
-    @foreach ($categories as $category)
+    {{-- let category = []; --}}
+    {{-- @foreach ($categories as $category)
       category.push("{{ $category->category }}");
-    @endforeach
-    console.log(category);
-    {{-- console.log({{ $categories }}); --}}
-    {{-- $categories --}}
-    {{-- {{ $categories }} --}}
+    @endforeach --}}
+    console.log(@json($categories_array));
+
   </x-slot>
 
   <div class="py-12">

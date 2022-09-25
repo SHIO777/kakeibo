@@ -38,10 +38,15 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        // kinds, categories
-        $kinds = Kind::all()->sortBy('id');
         $categories = Category::all()->sortBy('category')->sortBy('kind_id');
-        return view('transaction.create', compact(['kinds', 'categories']));
+        $categories_array = array();
+        foreach($categories as $category) {
+            $categories_array[] = $category->category;
+        };
+        // ddd($categories_array);
+        $kinds = Kind::all()->sortBy('id');
+        
+        return view('transaction.create', compact(['kinds', 'categories', 'categories_array']));
     }
 
     /**

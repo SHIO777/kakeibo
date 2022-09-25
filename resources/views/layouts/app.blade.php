@@ -34,10 +34,10 @@
             </main>
         </div>
     </body>
-    {{-- @if (Request::is('transaction/create'))
+    @if (Request::is('transaction/create'))
         <script type="text/javascript">
             {{ $javascript }}
         </script>
-    @endif --}}
+    @endif
 
 </html>
