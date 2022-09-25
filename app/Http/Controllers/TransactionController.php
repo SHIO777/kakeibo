@@ -39,14 +39,19 @@ class TransactionController extends Controller
     public function create()
     {
         $categories = Category::all()->sortBy('category')->sortBy('kind_id');
-        $categories_array = array();
-        foreach($categories as $category) {
-            $categories_array[] = $category->category;
-        };
-        // ddd($categories_array);
+
+        // categoryのarrayを作成
+        // $categories_array = array();
+        // foreach($categories as $category) {
+        //     $categories_array[] = $category->category;
+        // };
+
+        $categories_json = json_encode(Category::select('id', 'kind_id', 'category')->get());
+        // ddd($categories_json);
+
         $kinds = Kind::all()->sortBy('id');
         
-        return view('transaction.create', compact(['kinds', 'categories', 'categories_array']));
+        return view('transaction.create', compact(['kinds', 'categories', 'categories_json']));
     }
 
     /**

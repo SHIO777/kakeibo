@@ -6,11 +6,21 @@
   </x-slot>
 
   <x-slot name="javascript">
-    {{-- let category = []; --}}
-    {{-- @foreach ($categories as $category)
-      category.push("{{ $category->category }}");
-    @endforeach --}}
-    console.log(@json($categories_array));
+    {{-- let category = @json($categories_json); --}}
+    {{-- let json_data = JSON.stringify(@json($categories_json), ['id', 'kind_id', 'category']); --}}
+    {{-- console.log(category); --}}
+    {{-- console.log(json_data); --}}
+    {{-- console.log(category["id"]); --}}
+    {{-- category.forEach(data) =>{
+      console.log(data)
+    } --}}
+
+
+    const selectedKind = document.getElementById('kind_id');
+    @if (selectedKind.value == )
+        
+    @endif
+
 
   </x-slot>
 
@@ -37,7 +47,7 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="kind">Category</label>
               <select name="category_id" id="category_id">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
+                  <option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
                 @endforeach
               </select>
             </div>
