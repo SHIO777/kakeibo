@@ -7,6 +7,7 @@ use Validator;
 use App\Models\Transaction;
 use App\Models\Kind;
 use App\Models\Category;
+use App\Models\User;
 use Auth;
 
 class TransactionController extends Controller
@@ -18,8 +19,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        // 買い物した日付（date）順で並び替える
-        $transactions = Transaction::all()->sortBy('date');
+        $transactions = User::query()
+            ->find(Auth::user()->id)
+            ->userTransactions()
+            ->orderByDesc('date')       // 買い物した日付（date）順で並び替える
+            ->get();
         $kinds = Kind::all();
         $categories = Category::all();
         return view('transaction.index', compact(['transactions', 'kinds', 'categories']));
