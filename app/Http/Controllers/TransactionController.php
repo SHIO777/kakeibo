@@ -38,15 +38,19 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $categories = Category::all()->sortBy('category')->sortBy('kind_id');
+        // $categories = Category::all()->sortBy('category')->sortBy('kind_id');
+        $categories = Category::all()->sortBy('id');
 
         // categoryのarrayを作成
         // $categories_array = array();
         // foreach($categories as $category) {
         //     $categories_array[] = $category->category;
         // };
-
-        $categories_json = json_encode(Category::select('id', 'kind_id', 'category')->get());
+         
+        $categories_data = Category::select('id', 'kind_id', 'category')->get();
+        // ddd($categories_data);
+        // $categories_json = json_encode($categories_data);
+        $categories_json = $categories_data->toJson();
         // ddd($categories_json);
 
         $kinds = Kind::all()->sortBy('id');
@@ -63,9 +67,28 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         // validation
+        // Kindとcategoryの整合性がとれているか確認
+        $arrowCategory = array();
+
+        // ddd($request->kind_id);     // "2"
+        // ddd(gettype($request->kind_id)); // -> string
+        // ddd(gettype((int)$request->kind_id)); // -> integer
+        // ddd($request->all()['kind_id']);
+
+        $categories = Category::where('kind_id', '=', $request->all()['kind_id'])->get();
+        // ddd($categories);
+        foreach($categories as $category) {
+            // ddd($category->id);
+            $arrowCategory[] = $category->id;
+        };
+        // ddd(in_array(15, $arrowCategory));
+        
+        // $this -> allslots = $arrowCategory;
+        // $request['allslots'] = $this->allslots;
+        $request['allow category array'] = $arrowCategory;
         $validator = Validator::make($request->all(), [
             'kind_id' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|in_array:allow category array.*',
             'price' => 'required',
             'date' => 'required',
             'place' => 'max:100',

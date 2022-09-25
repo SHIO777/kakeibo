@@ -6,20 +6,34 @@
   </x-slot>
 
   <x-slot name="javascript">
-    {{-- let category = @json($categories_json); --}}
-    {{-- let json_data = JSON.stringify(@json($categories_json), ['id', 'kind_id', 'category']); --}}
-    {{-- console.log(category); --}}
-    {{-- console.log(json_data); --}}
-    {{-- console.log(category["id"]); --}}
-    {{-- category.forEach(data) =>{
-      console.log(data)
-    } --}}
+    const kindId = document.getElementById('kind_id');                // 現在のkind_idを取得
+    const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
+    const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
 
+    {{-- setCategoryOptions(kindId.value); --}}
+    console.log(category);
 
-    const selectedKind = document.getElementById('kind_id');
-    @if (selectedKind.value == )
-        
-    @endif
+    function setCategoryOptions(currentKindId) {
+      // セレクトボックスの初期値を全てクリア
+      while (selectCategory.lastChild) {
+        selectCategory.removeChild(selectCategory.lastChild);
+      }
+
+      for (let i=0; i<category.length; i++) {
+        {{-- console.log(typeof(currentKindId), typeof(category[i].kind_id)) // ->string number --}}
+        if (parseInt(currentKindId) == parseInt(category[i].kind_id)) {
+          const option = document.createElement('option');    // option要素を新しく作る
+          option.value = category[i].id;              // valueにcategory_idを指定
+          option.innerHTML = category[i].id + ": " + category[i].category;    // ユーザー向けの表示としてカテゴリ名を表示
+          selectCategory.appendChild(option);
+        }
+      }
+    }
+    // Kind (payment/income)が変更されたら処理を行う
+    {{-- kindId.addEventListener('change', (e) => {
+      // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
+      setCategoryOptions(e.target.value);
+    }) --}}
 
 
   </x-slot>
@@ -73,7 +87,7 @@
             </div>
 
             {{-- <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"> --}}
-            <button type="submit" onclick="confirm()" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create
             </button>
           </form>
