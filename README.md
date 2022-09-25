@@ -24,6 +24,12 @@ This application allows you to record and analyze your daily income and expenses
 
 # Seed data
 
+```
+sail php artisan migrate:fresh
+
+sail php artisan db:seed --class=DatabaseSeeder && sail php artisan db:seed --class=KindsSeeder && sail php artisan db:seed --class=CategoriesSeeder && sail php artisan db:seed --class=TransactionsSeeder
+```
+
 ## using faker data
 To use faker data, you need to create Factory file.
 
