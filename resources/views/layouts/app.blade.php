@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+        {{-- <script src="js/app.js"></script> --}}
         {{-- <script src="{{ mix('/js/test.js') }}"></script> --}}
     </head>
     <body class="font-sans antialiased">
@@ -31,10 +33,10 @@
             </main>
         </div>
     </body>
-    @if (Request::is('transaction/create'))
+    {{-- @if (Request::is('transaction/create'))
         <script type="text/javascript">
             {{ $javascript }}
         </script>
-    @endif
+    @endif --}}
 
 </html>
