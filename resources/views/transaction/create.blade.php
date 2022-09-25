@@ -13,11 +13,11 @@
     {{-- console.log({{ old('kind_id') }}) --}}
     {{-- console.log({{ old('category_id') }}) --}}
 
-    // kindIdに前回の値を設定．前の値が保存されていなければ初期値を1に設定
+    // kindIdに直前の値を設定．直前の値が保存されていなければ初期値を1に設定
     kindId.value = {{ old('kind_id', 1) }};
     // 現在のkindIdに対応するcategoryオプションを生成
     setCategoryOptions(kindId.value);
-    // selectCategoryに前回の値を設定．初期値1
+    // selectCategoryに直前の値を設定．初期値1
     selectCategory.value = {{ old('category_id', 1) }};
 
     console.log(category);
