@@ -10,7 +10,16 @@
     const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
     const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
 
+    {{-- console.log({{ old('kind_id') }}) --}}
+    {{-- console.log({{ old('category_id') }}) --}}
+
+    // kindIdに前回の値を設定．前の値が保存されていなければ初期値を1に設定
+    kindId.value = {{ old('kind_id', 1) }};
+    // 現在のkindIdに対応するcategoryオプションを生成
     setCategoryOptions(kindId.value);
+    // selectCategoryに前回の値を設定．初期値1
+    selectCategory.value = {{ old('category_id', 1) }};
+
     console.log(category);
 
     function setCategoryOptions(currentKindId) {
@@ -34,7 +43,6 @@
       // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
       setCategoryOptions(e.target.value);
     })
-
 
   </x-slot>
 

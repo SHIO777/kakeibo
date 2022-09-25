@@ -22,14 +22,14 @@ class TransactionController extends Controller
         $transactions = User::query()
             ->find(Auth::user()->id)
             ->userTransactions()
-            ->orderByDesc('created_at') // 作成された順に並べる
             ->orderByDesc('date')       // 買い物した日付（date）順で並び替える
+            ->orderByDesc('created_at') // 作成された順に並べる
             ->with('kind')              // eager loading for preventing lazy loading
             ->with('category')
-            ->get();
-        $kinds = Kind::all();
-        $categories = Category::all();
-        return view('transaction.index', compact(['transactions', 'kinds', 'categories']));
+            ->paginate(10);
+            // ->get();     // get() doesn't need
+        // ddd($transactions);
+        return view('transaction.index', compact(['transactions']));
     }
 
     /**
