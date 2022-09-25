@@ -22,6 +22,57 @@ This repository for 家計簿 Kakeibo (household accounts in Japanese) web appli
 using Laravel (PHP framework).
 This application allows you to record and analyze your daily income and expenses.
 
+# Seed data
+
+## using faker data
+To use faker data, you need to create Factory file.
+
+```
+sail php artisan make:factory TransactionFactory --model=Transaction 
+```
+
+Then you need to edit `database/factories/TransactionFactory.php`.
+
+```:TransactionFactory.php
+    public function definition()
+    {
+        // https://stackoverflow.com/questions/45930892/how-to-parse-a-faker-datetimebetween-with-carbon-in-laravel
+        // 過去1ヶ月間での収入支出を記録する
+        $events = $this->faker->dateTimeBetween('-30 days', 'now');
+
+        return [
+            'kind_id' => $this->faker->numberBetween(1, 2),
+            'category_id' => $this->faker->numberBetween(21, 38),
+            'price' => $this->faker->numberBetween(1000, 50000),
+            // 'date' => $this->faker->date(),
+            'date' => $events->format('Y-m-d'),     // dateTimeをフォーマット変換
+            'place' => $this->faker->streetName(),
+            'note' => $this->faker->realText($this->faker->numberBetween(10, 20)),
+        ];
+    }
+```
+
+
+```
+sail php artisan make:seeder TransactionsSeeder.php
+```
+
+Then you need to edit `database/seeders/TransactionsSeeder.php`.
+
+## manually adding data
+To add seed data for cateogries, kinds, and transactions
+you need to execute code below.
+
+```
+sail php artisan db:seed --class=KindsSeeder
+sail php artisan db:seed --class=CategoriesSeeder
+sail php artisan db:seed --class=TransactionsSeeder
+```
+
+To make seed data, first export db data from phpmyadmin page,
+then parse sql using selenium.ipynb which is located upper directory.
+
+
 # laravel-mix
 Please add line below to package.json
 
