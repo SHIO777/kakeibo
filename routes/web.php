@@ -17,6 +17,9 @@ use App\Http\Controllers\KindController;
 */
 
 Route::group(['middleware' => 'auth'], function(){
+    // 分析ページ
+    Route::get('/transaction/getdata', [TransactionController::class, 'getdata'])->name('transaction.getdata');
+    Route::get('transaction/analyze', [TransactionController::class, 'mydata'])->name('transaction.analyze');
     // 家計簿を入力するページ
     Route::resource('transaction', TransactionController::class);
     // 所得と支出のカテゴリーを追加するページ
@@ -26,7 +29,6 @@ Route::group(['middleware' => 'auth'], function(){
     // Route::post('/post/kind', AjaxController@getCategory)->name('post.getCategory');
     // chartjs page
     // Route::get('/chartjs', function() {return view('chartjs');});
-
 });
 
 Route::get('/', function () {

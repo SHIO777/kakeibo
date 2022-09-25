@@ -16,6 +16,14 @@
             {{ __('Dashboard') }}
           </x-nav-link>
         </div>
+
+        <!-- transaction 分析ページへのリンクを追加 -->
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <x-nav-link :href="route('transaction.analyze')" :active="request()->routeIs('transaction.analyze')">
+            {{ __('Transaction Analyze') }}
+          </x-nav-link>
+        </div>
+
         <!-- transaction 一覧ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
@@ -104,6 +112,12 @@
       </x-responsive-nav-link>
     </div>
 
+    <!-- Transaction 分析ページへのリンクを追加 -->
+    <div class="pt-2 pb-3 space-y-1">
+      <x-responsive-nav-link :href="route('transaction.analyze')" :active="request()->routeIs('transaction.index')">
+        {{ __('Transaction Analyze') }}
+      </x-responsive-nav-link>
+    </div>
     <!-- Transaction 一覧ページへのリンクを追加 -->
     <div class="pt-2 pb-3 space-y-1">
       <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">

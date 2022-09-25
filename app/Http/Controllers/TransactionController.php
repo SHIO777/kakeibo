@@ -201,4 +201,39 @@ class TransactionController extends Controller
         $result = Transaction::find($id)->delete();
         return redirect()->route('transaction.index');
     }
+
+    public function mydata()
+    {
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計を算出
+        $transactions = User::query()
+            ->find(Auth::user()->id)
+            ->userTransactions()
+            ->orderByDesc('date')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($day) {
+                return $day -> sum('price');
+            });
+        $transactions_json = $transactions->toJson();
+        return view('transaction.analyze', compact(['transactions_json']));
+    }
+
+    public function getdata()
+    {
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計を算出
+        $transactions = User::query()
+            ->find(Auth::user()->id)
+            // ->find(6)
+            ->userTransactions()
+            ->orderBy('date')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($day) {
+                return $day -> sum('price');
+            });
+        $transactions_json = $transactions->toJson();
+        return $transactions_json;
+    }
 }
