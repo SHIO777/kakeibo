@@ -10,7 +10,7 @@
     const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
     const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
 
-    {{-- setCategoryOptions(kindId.value); --}}
+    setCategoryOptions(kindId.value);
     console.log(category);
 
     function setCategoryOptions(currentKindId) {
@@ -30,10 +30,10 @@
       }
     }
     // Kind (payment/income)が変更されたら処理を行う
-    {{-- kindId.addEventListener('change', (e) => {
+    kindId.addEventListener('change', (e) => {
       // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
       setCategoryOptions(e.target.value);
-    }) --}}
+    })
 
 
   </x-slot>

@@ -22,6 +22,7 @@ class TransactionController extends Controller
         $transactions = User::query()
             ->find(Auth::user()->id)
             ->userTransactions()
+            ->orderByDesc('created_at') // 作成された順に並べる
             ->orderByDesc('date')       // 買い物した日付（date）順で並び替える
             ->with('kind')              // eager loading for preventing lazy loading
             ->with('category')
@@ -81,10 +82,8 @@ class TransactionController extends Controller
             // ddd($category->id);
             $arrowCategory[] = $category->id;
         };
-        // ddd(in_array(15, $arrowCategory));
+        // ddd(in_array(15, $arrowCategory));       // if kind_id = 2 -> true
         
-        // $this -> allslots = $arrowCategory;
-        // $request['allslots'] = $this->allslots;
         $request['allow category array'] = $arrowCategory;
         $validator = Validator::make($request->all(), [
             'kind_id' => 'required',
@@ -101,9 +100,13 @@ class TransactionController extends Controller
             ->withInput()
             ->withErrors($validator);
         }
+
+        // user_idをマージし，DBにinsertする
+        $data = $request->merge(['user_id' => Auth::user()->id])->all();
+
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
-        $result = Transaction::create($request->all());
+        $result = Transaction::create($data);
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
         return redirect()->route('transaction.index');
     }
