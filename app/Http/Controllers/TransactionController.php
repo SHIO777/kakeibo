@@ -138,8 +138,13 @@ class TransactionController extends Controller
         $transaction = Transaction::find($id);
         $kinds = Kind::all()->sortBy('id');
         $categories = Category::all()->sortBy('id');
+
+        // create()と同じ
+        $categories_data = Category::select('id', 'kind_id', 'category')->get();
+        $categories_json = $categories_data->toJson();
+
         // $category = Category::find($transaction->category_id);
-        return view('transaction.edit', compact(['transaction', 'kinds', 'categories']));
+        return view('transaction.edit', compact(['transaction', 'kinds', 'categories', 'categories_json']));
     }
 
     /**
@@ -151,9 +156,17 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // kindとcategoryの組み合わせが正しいかvalidation
+        $arrowCategory = array();
+        $categories = Category::where('kind_id', '=', $request->all()['kind_id'])->get();
+        foreach($categories as $category) {
+            $arrowCategory[] = $category->id;
+        };
+        $request['allow category array'] = $arrowCategory;
+
         $validator = Validator::make($request->all(), [
             'kind_id' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|in_array:allow category array.*',
             'price' => 'required',
             'date' => 'required',
             'place' => 'max:100',
@@ -166,6 +179,10 @@ class TransactionController extends Controller
             ->withInput()
             ->withErrors($validator);
         }
+
+        // user_idをマージし，DBにinsertする
+        $data = $request->merge(['user_id' => Auth::user()->id])->all();
+
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
         $result = Transaction::find($id)->update($request->all());

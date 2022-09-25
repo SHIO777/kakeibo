@@ -36,7 +36,9 @@
             </main>
         </div>
     </body>
-    @if (Request::is('transaction/create'))
+    {{-- @if (Request::is('transaction/create')|Request::is('transaction/*/edit')) --}}
+    {{-- @if (Request::routeIs('transaction.create')|Request::routeIs('transaction.edit')) --}}
+    @if (Request::routeIs('transaction.create')||Request::routeIs('transaction.edit'))
         <script type="text/javascript">
             {{ $javascript }}
         </script>
