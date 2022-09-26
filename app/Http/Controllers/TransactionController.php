@@ -216,7 +216,12 @@ class TransactionController extends Controller
                 return $day -> sum('price');
             });
         $transactions_json = $transactions->toJson();
-        return view('transaction.analyze', compact(['transactions_json']));
+
+        // $categories = Category::all()->sortBy('id');
+        $payment_categories = Category::where('kind_id', '=', 1)->get();
+        $income_categories = Category::where('kind_id', '=', 2)->get();
+
+        return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
     }
 
     public function getdata()
@@ -236,4 +241,28 @@ class TransactionController extends Controller
         $transactions_json = $transactions->toJson();
         return $transactions_json;
     }
+
+    public function postdata(Request $request)
+    {
+        $result = $request -> all();
+        return $result;
+
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計を算出
+        // $transactions = User::query()
+        //     ->find(Auth::user()->id)
+        //     // ->find(6)
+        //     ->userTransactions()
+        //     ->orderBy('date')
+        //     ->get()
+        //     ->groupBy('date')
+        //     ->map(function ($day) {
+        //         return $day -> sum('price');
+        //     });
+        // $transactions_json = $transactions->toJson();
+        // return $transactions_json;
+    }
+
+
+    
 }
