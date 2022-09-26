@@ -99,25 +99,17 @@
 
 
 <div class="py-12">
-    {{-- <div class="max-w-7xl mx-auto sm:w-10/12 sm:h-full md:w-8/10 md:h-full lg:w-10/12 lg:h-full"> --}}
-      {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200"> --}}
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="relative m-auto sm:h-72" style="position: relative; height: 500px; width; 600px">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="h-screen w-screen flex justify-center items-center">
+            <button type="submit" id="getdata" class="w-5/12 py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+                Update
+             </button>
+        </div>
 
-{{-- <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:w-10/12 md:w-8/10 lg:w-10/12"> --}}
-      {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> --}}
-    <div class="relative m-auto sm:h-72" style="position: relative; height: 500px; width; 600px">
-        <canvas id="myChart"></canvas>
     </div>
-          
-            {{-- <a href="route('transaction.getdata')"> --}}
-                {{-- <button type="submit" id="getdata" onclick="getCharts()">chart</button> --}}
-                <button type="submit" id="getdata">chart</button>
-
-            {{-- </a> --}}
-        {{-- </div> --}}
-      {{-- </div> --}}
-    </div>
-  </div>
+</div>
 </x-app-layout>
 
