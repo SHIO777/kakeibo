@@ -265,16 +265,17 @@ class TransactionController extends Controller
         for ($i = 1, $size = count($category_ids); $i <= $size; ++$i) {
             $filled_result[$i] = isset($transactions_category[$i]) ? $transactions_category[$i] : 0;
         }
-        // ddd($filled_result);
+        $filled_result_json = json_encode($filled_result);
 
         // $transactions_json = $transactions->toJson();
         // $categories = Category::all()->sortBy('id');
         $payment_categories = Category::where('kind_id', '=', 1)->get();
         // ddd($payment_categories);
         $income_categories = Category::where('kind_id', '=', 2)->get();
+        $categories_json = Category::select('id', 'kind_id', 'category')->get()->toJson();
 
         // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
-        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories']));
+        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories', 'categories_json', 'filled_result_json']));
     }
 
     public function getdata()
