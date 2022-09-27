@@ -206,8 +206,9 @@ class TransactionController extends Controller
     {
         $weeks = 1;
         // 今日を -0 weeksとする．
+        $start_week = date('YW', strtotime("-{$weeks} weeks"));
         $start_time = strtotime(date('Y\WW', strtotime("-{$weeks} weeks")));
-        // ddd(date('Y\WW', strtotime("-{$weeks} weeks")));
+        // ddd(date('Y\WW', strtotime("-{$weeks} weeks")));    // "2022W38"
         
         // Userモデルに定義したリレーションを使用してデータを取得する
         // 日々の収入支出の合計をカテゴリー別に算出
@@ -215,39 +216,59 @@ class TransactionController extends Controller
         //     ->find(Auth::user()->id)
         //     ->userTransactions()
         //     ->orderByDesc('date');
-            // ->select(DB::raw('YEARWEEK(date, 2) AS week'), DB::raw('sum(*) AS price_category'));
-            // ->whereRaw("date >= '".date('Y-m-d', $start_time)."'")
-            // ->groupBy('week')
-            // ->pluck('price_category', 'week')
-            // ->toArray();
-
-
             // ->get()
             // ->groupBy('date')
             // ->map(function ($day) {
             //     return $day -> sum('price');
             // });
-        $transactions = Transaction::select(
-            DB::raw('YEARWEEK(date, 2) AS week'), 
-            DB::raw('sum(*) AS price_category'))
-            ->whereRaw("date >= '".date('Y-m-d', $start_time)."'")
-            ->groupBy('week');
-            // ->pluck('price_category', 'week')
-            // ->toArray();
+
+        // SQL
+        // // ハイフンは``で囲む. sum(*)とはできない．必ずカラム名を指定する
+        // // week 作ってユーザーでtransaction絞って，探すユーザーに対応するtransaction idを確認する
+        // select id, yearweek(date, 2) as week, user_id, kind_id, category_id, price, date from transactions where user_id in (6);
+        // // 取得したtransaction idでtransaction dataを絞る
+        // select yearweek(date, 2) as week, price from  transactions where id in (2, 3, 5, 7);
+        // // week ごとにpriceを合計する．
+        // select yearweek(date, 2) as week, sum(price) from  transactions where id in (2, 3, 5, 7) group by week;
+        // Tinker
+        // Transaction::select(DB::raw('YEARWEEK(date, 2) AS week'), 'id', 'user_id', 'kind_id', 'category_id', 'price', 'date')->where('user_id', 6)->pluck('id');
+        
+        // ddd($start_week);
+        $user_id = Auth::user()->id;
+        $yearweek = date('Y\WW', strtotime("-$weeks weeks"));
+        $date_of_Monday = date('Y-m-d', strtotime($yearweek));
+        // Sunday 始まりにする
+        $start_date = date('Y-m-d', strtotime($date_of_Monday. '-1 day'));
+        $end_date = date('Y-m-d', strtotime($date_of_Monday. '+5 day'));
+        // ddd($start_date, $end_date);
+
+        // userのtransactions取得
+        $transaction_ids = Transaction::select('id', 'user_id')->where('user_id', $user_id)->pluck('id');
+        // 期間にあるtransactionを取得
+        // whereInの引数('id', [0, 1, 2])は，[]で囲むこと
+        $transactions = Transaction::select('id', 'date')->whereBetween('date', [$start_date, $end_date])->get();
+        ddd($transactions);
 
 
-Transaction::select(DB::raw('yearweek(date, 2) as week'), DB::raw('sum(price) as price_category'))->get();
+        // $transactions = Transaction::select('id', DB::raw('YEARWEEK(date, 2) AS week'))->DB::raw('where week in ($start_week)')->get();
+        $transactions = Transaction::select('id', DB::raw('YEARWEEK(date, 2) AS week'))->get();
 
 
-// // ハイフンは``で囲む. sum(*)とはできない．必ずカラム名を指定する
-// // week 作ってユーザーでtransaction絞って，探すユーザーに対応するtransaction idを確認する
-// select id, yearweek(date, 2) as week, user_id, kind_id, category_id, price, date from transactions where user_id in (6);
-// // 取得したtransaction idでtransaction dataを絞る
-// select yearweek(date, 2) as week, price from  transactions where id in (2, 3, 5, 7);
-// // week ごとにpriceを合計する．
-// select yearweek(date, 2) as week, sum(price) from  transactions where id in (2, 3, 5, 7) group by week;
 
-        dd($transactions);
+
+        $transactions2 = $transactions -> whereIn('week', [202238])->pluck('week', 'id');
+            // ->whereIn('week', $start_week)->get();
+        
+
+
+        $transactions = Transaction::select(DB::raw('YEARWEEK(date, 2) AS week'), DB::raw('sum(price) AS price'))
+            // ->whereIn('id', $transaction_ids)
+            ->having('week=', [$start_week])
+            ->groupBy('week')
+            ->pluck('week', 'price')
+            ->toArray();
+
+        ddd($transactions);
         $filled_result = [];
         for ($i = $weeks; $i>=1; $i--) {
             $week = date('YW', strtotime("-$i weeks"));
