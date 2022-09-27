@@ -244,37 +244,36 @@ class TransactionController extends Controller
 
         // whereInの引数('id', [0, 1, 2])は，[]で囲むこと
         // userのtransactions取得し，期間にあるtransactionを取得する
+        
         $transaction_ids = Transaction::select('id', 'user_id', 'date')->where('user_id', $user_id)->whereBetween('date', [$start_date, $end_date])->pluck('id');
-        $transactions_category = Transaction::select('category_id', DB::raw('sum(price) AS price'))
+        $transactions_category = Transaction::select(DB::raw('sum(price) AS price'), 'category_id')
             ->whereIn('id', $transaction_ids)
             ->groupBy('category_id')
-            ->pluck('category_id', 'price')
+            ->pluck('price', 'category_id')
             ->toArray();
-        ddd(transactions_category);
+        // $transactions_category = Transaction::select(DB::raw('sum(price) AS price'), 'category_id')->whereIn('id', $transaction_ids)->groupBy('category_id')->pluck('price', 'category_id')->toArray();
+        // ddd($transactions_category);
+        // ddd($transactions_category[15]);
 
-        $transactions = Transaction::select(DB::raw('YEARWEEK(date, 2) AS week'), DB::raw('sum(price) AS price'))
-            // ->whereIn('id', $transaction_ids)
-            ->groupBy('week')
-            ->pluck('week', 'price')
-            ->toArray();
-
-        ddd($transactions);
+        $category_ids = Category::all()->sortBy('id')->pluck('id');
         $filled_result = [];
-        for ($i = $weeks; $i>=1; $i--) {
-            $week = date('YW', strtotime("-$i weeks"));
-            $date = date('Y-m-d', strtotime("-$i weeks"));
-            $filled_result[$data] = isset($result[$week]) ? $result[$week] : 0;
+        // for ($i = $category_ids; $i>=1; $i--) {
+        //     $week = date('YW', strtotime("-$i weeks"));
+        //     $date = date('Y-m-d', strtotime("-$i weeks"));
+        //     $filled_result[$data] = isset($transactions[$week]) ? $result[$week] : 0;
+        // }
+        for ($i = 1, $size = count($category_ids); $i <= $size; ++$i) {
+            $filled_result[$i] = isset($transactions_category[$i]) ? $transactions_category[$i] : 0;
         }
+        // ddd($filled_result);
 
-        
-
-
-        $transactions_json = $transactions->toJson();
+        // $transactions_json = $transactions->toJson();
         // $categories = Category::all()->sortBy('id');
         $payment_categories = Category::where('kind_id', '=', 1)->get();
         $income_categories = Category::where('kind_id', '=', 2)->get();
 
-        return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
+        // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
+        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories']));
     }
 
     public function getdata()
