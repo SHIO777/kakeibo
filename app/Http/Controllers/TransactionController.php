@@ -32,6 +32,7 @@ class TransactionController extends Controller
         return view('transaction.index', compact(['transactions']));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,23 +42,15 @@ class TransactionController extends Controller
     {
         // $categories = Category::all()->sortBy('category')->sortBy('kind_id');
         $categories = Category::all()->sortBy('id');
-
-        // categoryのarrayを作成
-        // $categories_array = array();
-        // foreach($categories as $category) {
-        //     $categories_array[] = $category->category;
-        // };
-         
         $categories_data = Category::select('id', 'kind_id', 'category')->get();
         // ddd($categories_data);
         // $categories_json = json_encode($categories_data);
         $categories_json = $categories_data->toJson();
         // ddd($categories_json);
-
         $kinds = Kind::all()->sortBy('id');
-        
         return view('transaction.create', compact(['kinds', 'categories', 'categories_json']));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -70,12 +63,10 @@ class TransactionController extends Controller
         // validation
         // Kindとcategoryの整合性がとれているか確認
         $arrowCategory = array();
-
         // ddd($request->kind_id);     // "2"
         // ddd(gettype($request->kind_id)); // -> string
         // ddd(gettype((int)$request->kind_id)); // -> integer
         // ddd($request->all()['kind_id']);
-
         $categories = Category::where('kind_id', '=', $request->all()['kind_id'])->get();
         // ddd($categories);
         foreach($categories as $category) {
@@ -103,13 +94,12 @@ class TransactionController extends Controller
 
         // user_idをマージし，DBにinsertする
         $data = $request->merge(['user_id' => Auth::user()->id])->all();
-
-        // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
         $result = Transaction::create($data);
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
         return redirect()->route('transaction.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -126,6 +116,7 @@ class TransactionController extends Controller
         // ddd($transaction->all()->kind_id);
         return view('transaction.show', compact(['transaction', 'kind', 'category']));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -146,6 +137,7 @@ class TransactionController extends Controller
         // $category = Category::find($transaction->category_id);
         return view('transaction.edit', compact(['transaction', 'kinds', 'categories', 'categories_json']));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -190,6 +182,7 @@ class TransactionController extends Controller
         return redirect()->route('transaction.index');
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -201,6 +194,7 @@ class TransactionController extends Controller
         $result = Transaction::find($id)->delete();
         return redirect()->route('transaction.index');
     }
+
 
     public function mydata()
     {
@@ -244,7 +238,6 @@ class TransactionController extends Controller
 
         // whereInの引数('id', [0, 1, 2])は，[]で囲むこと
         // userのtransactions取得し，期間にあるtransactionを取得する
-        
         $transaction_ids = Transaction::select('id', 'user_id', 'date')->where('user_id', $user_id)->whereBetween('date', [$start_date, $end_date])->pluck('id');
         $transactions_category = Transaction::select(DB::raw('sum(price) AS price'), 'category_id')
             ->whereIn('id', $transaction_ids)
@@ -277,6 +270,7 @@ class TransactionController extends Controller
         // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
         return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories', 'categories_json', 'filled_result_json', 'start_date', 'end_date']));
     }
+
 
     public function getdata()
     {
@@ -316,7 +310,4 @@ class TransactionController extends Controller
         // $transactions_json = $transactions->toJson();
         // return $transactions_json;
     }
-
-
-    
 }
