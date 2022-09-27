@@ -275,7 +275,7 @@ class TransactionController extends Controller
         $categories_json = Category::select('id', 'kind_id', 'category')->get()->toJson();
 
         // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
-        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories', 'categories_json', 'filled_result_json']));
+        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories', 'categories_json', 'filled_result_json', 'start_date', 'end_date']));
     }
 
     public function getdata()

@@ -8,7 +8,7 @@
   <x-slot name="javascript">
     {{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script> --}} --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script> --}}
     {{-- 日本語の日付を表示するには以下が必要 --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/ja.js"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script> --}}
@@ -70,6 +70,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <span class="mx-auto mb-2 uppercase font-bold text-lg text-grey-darkest">Payment and Income</span>
+            <p class="mx-auto mb-2 font-bold text-lg text-grey-darkest">{{ $start_date }} to {{ $end_date }}</p>
             {{-- <div class="relative m-auto sm:h-72" style="position: relative; height: 500px; width; 600px"> --}}
             <div class="relative m-auto sm:h-72" style="position: relative; height: 500px; width; 500px">
                 <canvas id="myChart"></canvas>
