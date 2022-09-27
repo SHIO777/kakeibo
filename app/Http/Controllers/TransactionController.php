@@ -270,6 +270,7 @@ class TransactionController extends Controller
         // $transactions_json = $transactions->toJson();
         // $categories = Category::all()->sortBy('id');
         $payment_categories = Category::where('kind_id', '=', 1)->get();
+        // ddd($payment_categories);
         $income_categories = Category::where('kind_id', '=', 2)->get();
 
         // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));

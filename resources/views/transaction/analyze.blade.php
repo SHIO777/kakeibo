@@ -31,13 +31,13 @@
                         @foreach ($payment_categories as $category)
                         <tr>
                             <td class="px-6 py-2 text-left">{{ $category -> category }}</td>   
-                            <td class="px-6 py-2 text-left">¥{{ $category -> id }}{{ $category->category }}</th>
+                            <td class="px-6 py-2 text-left">¥{{ $filled_result[$loop->index+1] }}</th>
                         </tr>
                         @endforeach
                         @foreach ($income_categories as $category)
                         <tr>
                             <td class="px-6 py-2 text-left">{{ $category -> category }}</td>   
-                            <td class="px-6 py-2 text-left">¥{{ $category -> id }}{{ $category->category }}</th>
+                            <td class="px-6 py-2 text-left">¥{{ $filled_result[$loop->index+15] }}</th>
                         </tr>
                         @endforeach
                     {{-- </table>

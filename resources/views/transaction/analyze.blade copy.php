@@ -161,7 +161,6 @@
         </div>
         <div class="h-screen w-screen flex justify-center items-center">
         </div>
-
     </div>
 </div>
 </x-app-layout>
