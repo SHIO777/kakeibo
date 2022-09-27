@@ -244,30 +244,13 @@ class TransactionController extends Controller
 
         // whereInの引数('id', [0, 1, 2])は，[]で囲むこと
         // userのtransactions取得し，期間にあるtransactionを取得する
-
         $transaction_ids = Transaction::select('id', 'user_id', 'date')->where('user_id', $user_id)->whereBetween('date', [$start_date, $end_date])->pluck('id');
-        // $transactions_weekly = Transaction::select('id', 'date')->whereBetween('date', [$start_date, $end_date])->pluck('id');
-        // ddd($transactions);
-        // $transactions_category = Transaction::select('category_id', DB::raw('sum(price) AS price'))->whereIn('id', $transaction_ids)->groupBy('category_id')->pluck('category_id', 'price')->toArray();
-        
         $transactions_category = Transaction::select('category_id', DB::raw('sum(price) AS price'))
             ->whereIn('id', $transaction_ids)
             ->groupBy('category_id')
             ->pluck('category_id', 'price')
             ->toArray();
         ddd(transactions_category);
-
-
-        // $transactions = Transaction::select('id', DB::raw('YEARWEEK(date, 2) AS week'))->DB::raw('where week in ($start_week)')->get();
-        $transactions = Transaction::select('id', DB::raw('YEARWEEK(date, 2) AS week'))->get();
-
-
-
-
-        $transactions2 = $transactions -> whereIn('week', [202238])->pluck('week', 'id');
-            // ->whereIn('week', $start_week)->get();
-        
-
 
         $transactions = Transaction::select(DB::raw('YEARWEEK(date, 2) AS week'), DB::raw('sum(price) AS price'))
             // ->whereIn('id', $transaction_ids)
