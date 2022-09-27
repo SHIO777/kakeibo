@@ -6,44 +6,45 @@
   </x-slot>
 
   <x-slot name="javascript">
-    const kindId = document.getElementById('kind_id');                // 現在のkind_idを取得
-    const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
-    const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
+    <script type="text/javascript">
+      const kindId = document.getElementById('kind_id');                // 現在のkind_idを取得
+      const selectCategory = document.getElementById('category_id');    // categoryのセレクトボックスを取得
+      const category = {!! $categories_json !!};    // viewからjson形式で渡されたcategoryデータを変数に代入
 
-    {{-- console.log({{ old('kind_id') }}) --}}
-    {{-- console.log({{ old('category_id') }}) --}}
+      {{-- console.log({{ old('kind_id') }}) --}}
+      {{-- console.log({{ old('category_id') }}) --}}
 
-    // kindIdに直前の値を設定．直前の値が保存されていなければ初期値を1に設定
-    kindId.value = {{ old('kind_id', 1) }};
-    // 現在のkindIdに対応するcategoryオプションを生成
-    setCategoryOptions(kindId.value);
-    // selectCategoryに直前の値を設定．初期値1
-    selectCategory.value = {{ old('category_id', 1) }};
+      // kindIdに直前の値を設定．直前の値が保存されていなければ初期値を1に設定
+      kindId.value = {{ old('kind_id', 1) }};
+      // 現在のkindIdに対応するcategoryオプションを生成
+      setCategoryOptions(kindId.value);
+      // selectCategoryに直前の値を設定．初期値1
+      selectCategory.value = {{ old('category_id', 1) }};
 
-    console.log(category);
+      console.log(category);
 
-    function setCategoryOptions(currentKindId) {
-      // セレクトボックスの初期値を全てクリア
-      while (selectCategory.lastChild) {
-        selectCategory.removeChild(selectCategory.lastChild);
-      }
+      function setCategoryOptions(currentKindId) {
+        // セレクトボックスの初期値を全てクリア
+        while (selectCategory.lastChild) {
+          selectCategory.removeChild(selectCategory.lastChild);
+        }
 
-      for (let i=0; i<category.length; i++) {
-        {{-- console.log(typeof(currentKindId), typeof(category[i].kind_id)) // ->string number --}}
-        if (parseInt(currentKindId) == parseInt(category[i].kind_id)) {
-          const option = document.createElement('option');    // option要素を新しく作る
-          option.value = category[i].id;              // valueにcategory_idを指定
-          option.innerHTML = category[i].id + ": " + category[i].category;    // ユーザー向けの表示としてカテゴリ名を表示
-          selectCategory.appendChild(option);
+        for (let i=0; i<category.length; i++) {
+          {{-- console.log(typeof(currentKindId), typeof(category[i].kind_id)) // ->string number --}}
+          if (parseInt(currentKindId) == parseInt(category[i].kind_id)) {
+            const option = document.createElement('option');    // option要素を新しく作る
+            option.value = category[i].id;              // valueにcategory_idを指定
+            option.innerHTML = category[i].id + ": " + category[i].category;    // ユーザー向けの表示としてカテゴリ名を表示
+            selectCategory.appendChild(option);
+          }
         }
       }
-    }
-    // Kind (payment/income)が変更されたら処理を行う
-    kindId.addEventListener('change', (e) => {
-      // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
-      setCategoryOptions(e.target.value);
-    })
-
+      // Kind (payment/income)が変更されたら処理を行う
+      kindId.addEventListener('change', (e) => {
+        // 選択されたkindのkind_idを引数としてsetCategoryOptionsに渡す
+        setCategoryOptions(e.target.value);
+      })
+    </script>
   </x-slot>
 
   <div class="py-12">

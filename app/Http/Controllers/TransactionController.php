@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Transaction;
 use App\Models\Kind;
@@ -27,10 +28,10 @@ class TransactionController extends Controller
             ->with('kind')              // eager loading for preventing lazy loading
             ->with('category')
             ->paginate(10);
-            // ->get();     // get() doesn't need
         // ddd($transactions);
         return view('transaction.index', compact(['transactions']));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,23 +42,15 @@ class TransactionController extends Controller
     {
         // $categories = Category::all()->sortBy('category')->sortBy('kind_id');
         $categories = Category::all()->sortBy('id');
-
-        // categoryのarrayを作成
-        // $categories_array = array();
-        // foreach($categories as $category) {
-        //     $categories_array[] = $category->category;
-        // };
-         
         $categories_data = Category::select('id', 'kind_id', 'category')->get();
         // ddd($categories_data);
         // $categories_json = json_encode($categories_data);
         $categories_json = $categories_data->toJson();
         // ddd($categories_json);
-
         $kinds = Kind::all()->sortBy('id');
-        
         return view('transaction.create', compact(['kinds', 'categories', 'categories_json']));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -70,12 +63,10 @@ class TransactionController extends Controller
         // validation
         // Kindとcategoryの整合性がとれているか確認
         $arrowCategory = array();
-
         // ddd($request->kind_id);     // "2"
         // ddd(gettype($request->kind_id)); // -> string
         // ddd(gettype((int)$request->kind_id)); // -> integer
         // ddd($request->all()['kind_id']);
-
         $categories = Category::where('kind_id', '=', $request->all()['kind_id'])->get();
         // ddd($categories);
         foreach($categories as $category) {
@@ -103,13 +94,12 @@ class TransactionController extends Controller
 
         // user_idをマージし，DBにinsertする
         $data = $request->merge(['user_id' => Auth::user()->id])->all();
-
-        // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
         $result = Transaction::create($data);
         // ルーティング「category.index」にリクエスト送信（一覧ページに移動）
         return redirect()->route('transaction.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -126,6 +116,7 @@ class TransactionController extends Controller
         // ddd($transaction->all()->kind_id);
         return view('transaction.show', compact(['transaction', 'kind', 'category']));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -146,6 +137,7 @@ class TransactionController extends Controller
         // $category = Category::find($transaction->category_id);
         return view('transaction.edit', compact(['transaction', 'kinds', 'categories', 'categories_json']));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -190,6 +182,7 @@ class TransactionController extends Controller
         return redirect()->route('transaction.index');
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -200,5 +193,121 @@ class TransactionController extends Controller
     {
         $result = Transaction::find($id)->delete();
         return redirect()->route('transaction.index');
+    }
+
+
+    public function mydata()
+    {
+        $weeks = 1;
+        // 今日を -0 weeksとする．
+        $start_week = date('YW', strtotime("-{$weeks} weeks"));
+        $start_time = strtotime(date('Y\WW', strtotime("-{$weeks} weeks")));
+        // ddd(date('Y\WW', strtotime("-{$weeks} weeks")));    // "2022W38"
+        
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計をカテゴリー別に算出
+        // $transactions = User::query()
+        //     ->find(Auth::user()->id)
+        //     ->userTransactions()
+        //     ->orderByDesc('date');
+            // ->get()
+            // ->groupBy('date')
+            // ->map(function ($day) {
+            //     return $day -> sum('price');
+            // });
+
+        // SQL
+        // // ハイフンは``で囲む. sum(*)とはできない．必ずカラム名を指定する
+        // // week 作ってユーザーでtransaction絞って，探すユーザーに対応するtransaction idを確認する
+        // select id, yearweek(date, 2) as week, user_id, kind_id, category_id, price, date from transactions where user_id in (6);
+        // // 取得したtransaction idでtransaction dataを絞る
+        // select yearweek(date, 2) as week, price from  transactions where id in (2, 3, 5, 7);
+        // // week ごとにpriceを合計する．
+        // select yearweek(date, 2) as week, sum(price) from  transactions where id in (2, 3, 5, 7) group by week;
+        // Tinker
+        // Transaction::select(DB::raw('YEARWEEK(date, 2) AS week'), 'id', 'user_id', 'kind_id', 'category_id', 'price', 'date')->where('user_id', 6)->pluck('id');
+        
+        // ddd($start_week);
+        $user_id = Auth::user()->id;
+        $yearweek = date('Y\WW', strtotime("-$weeks weeks"));
+        $date_of_Monday = date('Y-m-d', strtotime($yearweek));
+        // Sunday 始まりにする
+        $start_date = date('Y-m-d', strtotime($date_of_Monday. '-1 day'));
+        $end_date = date('Y-m-d', strtotime($date_of_Monday. '+5 day'));
+        // ddd($start_date, $end_date);
+
+        // whereInの引数('id', [0, 1, 2])は，[]で囲むこと
+        // userのtransactions取得し，期間にあるtransactionを取得する
+        $transaction_ids = Transaction::select('id', 'user_id', 'date')->where('user_id', $user_id)->whereBetween('date', [$start_date, $end_date])->pluck('id');
+        $transactions_category = Transaction::select(DB::raw('sum(price) AS price'), 'category_id')
+            ->whereIn('id', $transaction_ids)
+            ->groupBy('category_id')
+            ->pluck('price', 'category_id')
+            ->toArray();
+        // $transactions_category = Transaction::select(DB::raw('sum(price) AS price'), 'category_id')->whereIn('id', $transaction_ids)->groupBy('category_id')->pluck('price', 'category_id')->toArray();
+        // ddd($transactions_category);
+        // ddd($transactions_category[15]);
+
+        $category_ids = Category::all()->sortBy('id')->pluck('id');
+        $filled_result = [];
+        // for ($i = $category_ids; $i>=1; $i--) {
+        //     $week = date('YW', strtotime("-$i weeks"));
+        //     $date = date('Y-m-d', strtotime("-$i weeks"));
+        //     $filled_result[$data] = isset($transactions[$week]) ? $result[$week] : 0;
+        // }
+        for ($i = 1, $size = count($category_ids); $i <= $size; ++$i) {
+            $filled_result[$i] = isset($transactions_category[$i]) ? $transactions_category[$i] : 0;
+        }
+        $filled_result_json = json_encode($filled_result);
+
+        // $transactions_json = $transactions->toJson();
+        // $categories = Category::all()->sortBy('id');
+        $payment_categories = Category::where('kind_id', '=', 1)->get();
+        // ddd($payment_categories);
+        $income_categories = Category::where('kind_id', '=', 2)->get();
+        $categories_json = Category::select('id', 'kind_id', 'category')->get()->toJson();
+
+        // return view('transaction.analyze', compact(['transactions_json', 'payment_categories', 'income_categories']));
+        return view('transaction.analyze', compact(['filled_result', 'payment_categories', 'income_categories', 'categories_json', 'filled_result_json', 'start_date', 'end_date']));
+    }
+
+
+    public function getdata()
+    {
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計を算出
+        $transactions = User::query()
+            ->find(Auth::user()->id)
+            // ->find(6)
+            ->userTransactions()
+            ->orderBy('date')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($day) {
+                return $day -> sum('price');
+            });
+        $transactions_json = $transactions->toJson();
+        return $transactions_json;
+    }
+
+    public function postdata(Request $request)
+    {
+        $result = $request -> all();
+        return $result;
+
+        // Userモデルに定義したリレーションを使用してデータを取得する
+        // 日々の収入支出の合計を算出
+        // $transactions = User::query()
+        //     ->find(Auth::user()->id)
+        //     // ->find(6)
+        //     ->userTransactions()
+        //     ->orderBy('date')
+        //     ->get()
+        //     ->groupBy('date')
+        //     ->map(function ($day) {
+        //         return $day -> sum('price');
+        //     });
+        // $transactions_json = $transactions->toJson();
+        // return $transactions_json;
     }
 }
