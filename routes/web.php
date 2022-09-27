@@ -18,9 +18,11 @@ use App\Http\Controllers\KindController;
 
 Route::group(['middleware' => 'auth'], function(){
     // 分析ページ
-    Route::post('/transaction/postdata', [TransactionController::class, 'postdata'])->name('transaction.postdata'); // post
-    Route::get('/transaction/getdata', [TransactionController::class, 'getdata'])->name('transaction.getdata'); // get
     Route::get('transaction/analyze', [TransactionController::class, 'mydata'])->name('transaction.analyze');   // analyze page UI
+    // 分析ページで非同期通信するときに使用
+    // Route::post('/transaction/postdata', [TransactionController::class, 'postdata'])->name('transaction.postdata'); // post
+    // Route::get('/transaction/getdata', [TransactionController::class, 'getdata'])->name('transaction.getdata'); // get
+    
     // 家計簿を入力するページ
     Route::resource('transaction', TransactionController::class);
     // 所得と支出のカテゴリーを追加するページ
