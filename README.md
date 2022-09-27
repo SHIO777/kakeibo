@@ -1,6 +1,6 @@
 
 
-# TODO
+<!-- # TODO
 - [x] chartjs 導入
 - [x] ページネーション
 - [x] 非同期通信（GET）
@@ -9,37 +9,54 @@
 - [ ] 非同期通信（POST）
 - [ ] 色々アイコン追加
 - [ ] 必須入力フィールドにマーク
-- [ ] chartjs カテゴリー別のグラフ
+- [ ] chartjs カテゴリー別のグラフ -->
+
+# About this repository
+Laravelを使用して家計簿を作成．
+
+This repository for 家計簿 Kakeibo (household accounts in Japanese) web application
+using Laravel (PHP framework).
+This application allows you to record and analyze your daily income and expenses.
+
+# 動画のファイル名
+`DEC_Phase01/20/20_kakeibo.mov`
+
+# ページの説明
+- Transaction Create: 収入支出の記録を作成
+![Transaction Create](md_pics/1.png)
+- Transaction Index: 収入支出の記録一覧
+![Transaction Create](md_pics/2.png)
+- Transaction Analyze: 収入支出の記録を分析
+![Transaction Create](md_pics/3.png)
+![Transaction Create](md_pics/4.png)
 
 # 工夫した点
-- ページネーション
-- jsと連携しセレクトボックスを動的に変更
-- {{ old('name') }}ヘルパーを使用して，直前の値を復活させる．
+- JavaScriptと連携し，Transaction Createページのセレクトボックスを動的に変更できるよう実装した
+    - Kind（PaymentかIncome）の入力値に応じてCategoryの選択肢を変動させるようにした
+- Transaction Indexページでページネーションを実装した
+- {{ old('name') }}ヘルパーを使用して，バリデーションエラーが生じても直前の値を保持できるようにした
+- Chartjsを導入し，先週の収入支出を可視化した
 
-# Tech
+# 使用した技術
 - Framework
     - Laravel (PHP framework)
 - Design
     - Tailwind CSS
 - Chart
     - chart.js
-- Asynchronous communication
-    - axios
+<!-- - Asynchronous communication
+    - axios -->
 
-# About this repository
-This repository for 家計簿 Kakeibo (household accounts in Japanese) web application
-using Laravel (PHP framework).
-This application allows you to record and analyze your daily income and expenses.
 
-# Seed data
-
+# 開発時のメモ
+## Seed data
 ```
 sail php artisan migrate:fresh
 
 sail php artisan db:seed --class=DatabaseSeeder && sail php artisan db:seed --class=KindsSeeder && sail php artisan db:seed --class=CategoriesSeeder && sail php artisan db:seed --class=TransactionsSeeder
 ```
 
-## using faker data
+### using faker data
 To use faker data, you need to create Factory file.
 
 ```
@@ -75,7 +92,7 @@ sail php artisan make:seeder TransactionsSeeder.php
 
 Then you need to edit `database/seeders/TransactionsSeeder.php`.
 
-## manually adding data
+### manually adding seed data
 To add seed data for cateogries, kinds, and transactions
 you need to execute code below.
 
@@ -102,7 +119,7 @@ To make seed data, first export db data from phpmyadmin page,
 then parse sql using selenium.ipynb which is located upper directory.
 
 
-# laravel-mix
+<!-- # laravel-mix
 Please add line below to package.json
 
 ```
@@ -124,10 +141,10 @@ Please add line below to package.json
         "chart.js": "^3.9.1"
     }
 }
-```
+``` -->
 
 
-# Command
+## Command
 ```
 // show routing table
 sail php artisan route:list | grep tweet
