@@ -37,7 +37,7 @@
           </x-nav-link>
         </div>
 
-        <!-- category 一覧ページへのリンクを追加 -->
+        {{-- <!-- category 一覧ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
             {{ __('Category Index') }}
@@ -60,7 +60,7 @@
           <x-nav-link :href="route('kind.create')" :active="request()->routeIs('kind.create')">
             {{ __('Kind Create') }}
           </x-nav-link>
-        </div>
+        </div> --}}
       </div>
 
       <!-- Settings Dropdown -->
@@ -131,7 +131,7 @@
       </x-responsive-nav-link>
     </div>
 
-    <!-- Category 一覧ページへのリンクを追加 -->
+    {{-- <!-- Category 一覧ページへのリンクを追加 -->
     <div class="pt-2 pb-3 space-y-1">
       <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
         {{ __('Category Index') }}
@@ -154,7 +154,7 @@
       <x-responsive-nav-link :href="route('kind.create')" :active="request()->routeIs('kind.create')">
         {{ __('Kind Create') }}
       </x-responsive-nav-link>
-    </div>
+    </div> --}}
 
     <!-- Responsive Settings Options -->
     <div class="pt-4 pb-1 border-t border-gray-200">
