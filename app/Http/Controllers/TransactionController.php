@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Transaction;
 use App\Models\Kind;
@@ -27,7 +28,6 @@ class TransactionController extends Controller
             ->with('kind')              // eager loading for preventing lazy loading
             ->with('category')
             ->paginate(10);
-            // ->get();     // get() doesn't need
         // ddd($transactions);
         return view('transaction.index', compact(['transactions']));
     }
@@ -204,19 +204,61 @@ class TransactionController extends Controller
 
     public function mydata()
     {
+        $weeks = 1;
+        // 今日を -0 weeksとする．
+        $start_time = strtotime(date('Y\WW', strtotime("-{$weeks} weeks")));
+        // ddd(date('Y\WW', strtotime("-{$weeks} weeks")));
+        
         // Userモデルに定義したリレーションを使用してデータを取得する
-        // 日々の収入支出の合計を算出
-        $transactions = User::query()
-            ->find(Auth::user()->id)
-            ->userTransactions()
-            ->orderByDesc('date')
-            ->get()
-            ->groupBy('date')
-            ->map(function ($day) {
-                return $day -> sum('price');
-            });
-        $transactions_json = $transactions->toJson();
+        // 日々の収入支出の合計をカテゴリー別に算出
+        // $transactions = User::query()
+        //     ->find(Auth::user()->id)
+        //     ->userTransactions()
+        //     ->orderByDesc('date');
+            // ->select(DB::raw('YEARWEEK(date, 2) AS week'), DB::raw('sum(*) AS price_category'));
+            // ->whereRaw("date >= '".date('Y-m-d', $start_time)."'")
+            // ->groupBy('week')
+            // ->pluck('price_category', 'week')
+            // ->toArray();
 
+
+            // ->get()
+            // ->groupBy('date')
+            // ->map(function ($day) {
+            //     return $day -> sum('price');
+            // });
+        $transactions = Transaction::select(
+            DB::raw('YEARWEEK(date, 2) AS week'), 
+            DB::raw('sum(*) AS price_category'))
+            ->whereRaw("date >= '".date('Y-m-d', $start_time)."'")
+            ->groupBy('week');
+            // ->pluck('price_category', 'week')
+            // ->toArray();
+
+
+Transaction::select(DB::raw('yearweek(date, 2) as week'), DB::raw('sum(price) as price_category'))->get();
+
+
+// // ハイフンは``で囲む. sum(*)とはできない．必ずカラム名を指定する
+// // week 作ってユーザーでtransaction絞って，探すユーザーに対応するtransaction idを確認する
+// select id, yearweek(date, 2) as week, user_id, kind_id, category_id, price, date from transactions where user_id in (6);
+// // 取得したtransaction idでtransaction dataを絞る
+// select yearweek(date, 2) as week, price from  transactions where id in (2, 3, 5, 7);
+// // week ごとにpriceを合計する．
+// select yearweek(date, 2) as week, sum(price) from  transactions where id in (2, 3, 5, 7) group by week;
+
+        dd($transactions);
+        $filled_result = [];
+        for ($i = $weeks; $i>=1; $i--) {
+            $week = date('YW', strtotime("-$i weeks"));
+            $date = date('Y-m-d', strtotime("-$i weeks"));
+            $filled_result[$data] = isset($result[$week]) ? $result[$week] : 0;
+        }
+
+        
+
+
+        $transactions_json = $transactions->toJson();
         // $categories = Category::all()->sortBy('id');
         $payment_categories = Category::where('kind_id', '=', 1)->get();
         $income_categories = Category::where('kind_id', '=', 2)->get();
