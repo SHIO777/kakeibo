@@ -94,16 +94,6 @@
                             <td class="px-6 py-2 text-left">¥{{ $filled_result[$loop->index+15] }}</th>
                         </tr>
                         @endforeach
-                    {{-- </table>
-                </div>
-                <div>
-                    <span class="mb-2 uppercase font-bold text-lg text-grey-darkest">Payment</span>
-                    <table class="w-full whitespace-nowrap">
-                        <tr>
-                            <th class="text-right"></th>
-                            <th class="text-right"></th>
-                        </tr> --}}
-
                     </table>
                 </div>
 
@@ -111,12 +101,5 @@
         </div>
     </div>
 </div>
-
-{{-- <div class="grid grid-cols-2 gap-1 justify-evenly">
-    <div class="bg-green-700 w-26 h-12">1</div>
-    <div class="bg-green-500 w-26 h-12">2</div>
-</div> --}}
-
-
 </x-app-layout>
 
